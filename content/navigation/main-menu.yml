@@ -1,0 +1,10 @@
+title: Main Menu
+items:
+  - label: Home
+    url: /
+    newTab: false
+    children: []
+  - label: About
+    url: /about
+    newTab: false
+    children: []

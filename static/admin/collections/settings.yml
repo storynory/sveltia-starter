@@ -1,0 +1,112 @@
+
+collections:
+  - name: settings
+    label: Site Settings
+    icon: settings
+
+    files:
+      - name: general
+        label: General Settings
+        file: content/settings/general.yml
+        format: yaml
+
+        fields:
+          - name: siteName
+            label: Site Name
+            widget: string
+            required: true
+
+          - name: tagline
+            label: Tagline
+            widget: string
+            required: false
+
+          - name: siteUrl
+            label: Website URL
+            widget: string
+            required: false
+
+          - name: description
+            label: Site Description
+            widget: text
+            required: false
+
+          - name: siteLogo
+            label: Site Logo
+            widget: image
+            required: false
+
+          - name: favicon
+            label: Favicon
+            widget: image
+            required: false
+
+          - name: defaultImage
+            label: Default Social Sharing Image
+            widget: image
+            required: false
+
+          - name: language
+            label: Site Language
+            widget: string
+            default: en-GB
+
+          - name: activeScheme
+            label: Active Colour Scheme
+            widget: relation
+            collection: colour-schemes
+            value_field: "{{slug}}"
+            search_fields:
+              - title
+            display_fields:
+              - title
+            required: false
+
+
+          - name: social
+            label: Social Links
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - name: facebook
+                label: Facebook URL
+                widget: string
+                required: false
+
+              - name: instagram
+                label: Instagram URL
+                widget: string
+                required: false
+
+              - name: youtube
+                label: YouTube URL
+                widget: string
+                required: false
+
+              - name: linkedin
+                label: LinkedIn URL
+                widget: string
+                required: false
+
+              - name: x
+                label: X (Twitter) URL
+                widget: string
+                required: false
+
+          - name: footer
+            label: Footer
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - name: copyright
+                label: Copyright Text
+                widget: string
+                required: false
+
+              - name: description
+                label: Footer Description
+                widget: text
+                required: false
+
