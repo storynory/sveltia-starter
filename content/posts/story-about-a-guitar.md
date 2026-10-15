@@ -3,7 +3,7 @@ title: Story about a guitar
 excerpt: My first story
 date: 2026-10-13T22:12:00
 author: bertie
-draft: true
+draft: false
 category: default
 tags:
   - music
