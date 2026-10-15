@@ -1,4 +1,14 @@
-# sv
+# Sveltia Starter Project
+
+## Simple API
+
+Gives use three get functions:
+
+getAll('posts') — retrieve every post.
+
+getOne('posts', slug) — retrieve one post, including its author, category and tags.
+
+getSettings() — retrieve site settings, including the selected colour scheme.
 
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
