@@ -5,7 +5,9 @@ date: 2026-10-13T22:12:00
 author: bertie
 draft: true
 category: default
-tags: []
+tags:
+  - music
+  - instruments
 showOnHome: true
 featured: false
 featuredImage: ''
