@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"test": "tsx --test scripts/generator/*.test.ts",
+		"test": "tsx --test scripts/generator/*.test.ts scripts/images/*.test.ts",
 		"test:routes": "tsx --test scripts/static-routes.test.ts",
 		"dev": "tsx scripts/generator/index.ts && vite dev",
 		"build": "tsx scripts/generator/index.ts && vite build",
