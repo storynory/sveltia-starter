@@ -39,3 +39,22 @@ test('skips unchanged images and rebuilds missing derivatives or changed setting
 		await fs.rm(root, { recursive: true, force: true });
 	}
 });
+
+test('original provider skips transforms and clears stale manifest', async () => {
+	const root = await fs.mkdtemp(path.join(os.tmpdir(), 'starter-original-'));
+	try {
+		const manifestFile = path.join(root, 'manifest.json');
+		await fs.writeFile(manifestFile, '{"old":{}}');
+		const result = await processImages({
+			provider: 'original',
+			sourceDir: path.join(root, 'missing'), outputDir: path.join(root, 'optimized'),
+			publicBase: '/uploads', generatedBase: '/optimized',
+			inputExts: ['.jpg'], widths: [320],
+			formats: { webp: { enabled: true, quality: 80 }, avif: { enabled: false, quality: 50 } },
+			fallback: { enabled: true, format: 'jpg', width: 640, quality: 82 },
+			manifestFile
+		});
+		assert.deepEqual(result, {});
+		assert.deepEqual(JSON.parse(await fs.readFile(manifestFile, 'utf8')), {});
+	} finally { await fs.rm(root, { recursive: true, force: true }); }
+});
