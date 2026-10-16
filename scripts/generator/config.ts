@@ -17,6 +17,7 @@ export type CmsField = {
 export type CmsCollection = {
 	public_route?: boolean;
 	template?: string;
+	list_template?: string;
 	fields?: CmsField[];
 	name: string;
 	folder?: string;
