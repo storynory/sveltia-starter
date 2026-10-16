@@ -28,4 +28,6 @@
 	.meta { display: flex; flex-wrap: wrap; gap: 1rem; color: #666; margin-bottom: 2rem; }
 	footer { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 2rem; }
 	.tag { background: #eee; border-radius: 1rem; padding: .25rem .75rem; }
+	.content :global(picture) { display: block; max-width: 100%; }
+	.content :global(img) { display: block; max-width: 100%; height: auto; }
 </style>
