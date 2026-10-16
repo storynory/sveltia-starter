@@ -3,6 +3,7 @@ collections:
   - name: posts
     label: Posts
     label_singular: Post
+    public_route: true
     folder: content/posts
     create: true
     extension: md
