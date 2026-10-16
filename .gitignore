@@ -21,3 +21,7 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Locally generated image cache and derivatives
+.image-cache.json
+static/optimized/
