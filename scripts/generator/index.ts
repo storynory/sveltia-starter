@@ -9,7 +9,7 @@ async function main() {
 	const output = generateCollections(config);
 	const templateDir = 'src/lib/templates';
 	const available = (await fs.readdir(templateDir))
-		.filter((file) => /^[A-Za-z][A-Za-z0-9]*\\.svelte$/.test(file))
+		.filter((file) => /^[A-Za-z][A-Za-z0-9]*\.svelte$/.test(file))
 		.map((file) => path.basename(file, '.svelte'));
 	const names = new Map<string, string>();
 	for (const name of available) {
@@ -27,9 +27,9 @@ async function main() {
 	}
 	const imports = [...names].map(([key, filename], i) =>
 		`import Template${i} from '../templates/${filename}.svelte';`
-	).join('\\n');
-	const mappings = [...names].map(([key], i) => `  ${JSON.stringify(key)}: Template${i}`).join(',\\n');
-	const registry = `// Generated automatically. Do not edit.\\n${imports}\\nexport const templates = {\\n${mappings}\\n};\\n`;
+	).join('\n');
+	const mappings = [...names].map(([key], i) => `  ${JSON.stringify(key)}: Template${i}`).join(',\n');
+	const registry = `// Generated automatically. Do not edit.\n${imports}\nexport const templates = {\n${mappings}\n};\n`;
 
 	await fs.mkdir('src/lib/generated', { recursive: true });
 	await fs.writeFile('src/lib/generated/collections.ts', output);
