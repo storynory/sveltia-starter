@@ -13,27 +13,12 @@ export const load: PageServerLoad = async ({ params }) => {
 	if (!item || !published(item as unknown as Record<string, unknown>)) {
 		error(404, 'Content not found');
 	}
-	const data = item as unknown as Record<string, unknown>;
-	const author = data.author;
-	const category = data.category;
-	const tags = data.tags;
-	const relatedLabel = (value: unknown, property: string): string =>
-		value && typeof value === 'object' && !Array.isArray(value)
-			? String((value as Record<string, unknown>)[property] ?? '')
-			: '';
-
+	const record = item as unknown as Record<string, unknown>;
+	const heading = record.title ?? record.name;
 	return {
-		title: String(data.title ?? data.name ?? params.slug),
-		html: item.html,
-		date: String(data.date ?? ''),
+		title: typeof heading === 'string' && heading ? heading : params.slug,
 		collection,
 		template: collections[collection].template,
-		author: relatedLabel(author, 'name'),
-		categoryLabel: relatedLabel(category, 'title'),
-		tags: Array.isArray(tags)
-			? tags.map((tag) => relatedLabel(tag, 'title')).filter(Boolean)
-			: [],
-		featuredImage: typeof data.featuredImage === 'string' ? data.featuredImage : '',
-		featuredImageAlt: typeof data.featuredImageAlt === 'string' ? data.featuredImageAlt : ''
+		item: record
 	};
 };
