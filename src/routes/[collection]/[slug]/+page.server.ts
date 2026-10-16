@@ -1,4 +1,5 @@
 import { error } from '@sveltejs/kit';
+import { collections } from '#lib/generated/collections.ts';
 import { getOne } from '#lib/server/content.ts';
 import { publicCollection, publicEntries, published } from '#lib/server/public-routes.ts';
 import type { EntryGenerator, PageServerLoad } from './$types';
@@ -26,6 +27,7 @@ export const load: PageServerLoad = async ({ params }) => {
 		html: item.html,
 		date: String(data.date ?? ''),
 		collection,
+		template: collections[collection].template,
 		author: relatedLabel(author, 'name'),
 		categoryLabel: relatedLabel(category, 'title'),
 		tags: Array.isArray(tags)
