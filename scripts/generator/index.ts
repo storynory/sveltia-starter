@@ -35,7 +35,7 @@ async function main() {
 	// Listing templates are independent from detail templates.
 	const listDir = 'src/lib/list-templates';
 	const listAvailable = (await fs.readdir(listDir))
-		.filter((file) => /^[A-Za-z][A-Za-z0-9]*\\.svelte$/.test(file))
+		.filter((file) => /^[A-Za-z][A-Za-z0-9]*\.svelte$/.test(file))
 		.map((file) => path.basename(file, '.svelte'));
 	const listNames = new Map<string, string>();
 	for (const name of listAvailable) {
@@ -51,9 +51,9 @@ async function main() {
 	}
 	const listImports = [...listNames].map(([, file], i) =>
 		`import ListTemplate${i} from '../list-templates/${file}.svelte';`
-	).join('\\n');
-	const listMappings = [...listNames].map(([key], i) => `  ${JSON.stringify(key)}: ListTemplate${i}`).join(',\\n');
-	const listRegistry = `// Generated automatically. Do not edit.\\n${listImports}\\nexport const listTemplates = {\\n${listMappings}\\n};\\n`;
+	).join('\n');
+	const listMappings = [...listNames].map(([key], i) => `  ${JSON.stringify(key)}: ListTemplate${i}`).join(',\n');
+	const listRegistry = `// Generated automatically. Do not edit.\n${listImports}\nexport const listTemplates = {\n${listMappings}\n};\n`;
 
 	const imports = [...names].map(([key, filename], i) =>
 		`import Template${i} from '../templates/${filename}.svelte';`
