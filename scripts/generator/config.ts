@@ -2,7 +2,20 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import YAML from 'yaml';
 
+export type CmsField = {
+	name: string;
+	widget?: string;
+	required?: boolean;
+	multiple?: boolean;
+	collection?: string;
+	value_field?: string;
+	fields?: CmsField[];
+	field?: CmsField;
+	options?: (string | { label?: string; value: string })[];
+};
+
 export type CmsCollection = {
+	fields?: CmsField[];
 	name: string;
 	folder?: string;
 	extension?: string;
@@ -11,6 +24,7 @@ export type CmsCollection = {
 		name: string;
 		file: string;
 		format?: string;
+		fields?: CmsField[];
 	}[];
 };
 
