@@ -3,9 +3,15 @@ import path from 'node:path';
 import { loadConfig } from './config';
 import { generateCollections } from './collections';
 import { generateTypes } from './types';
+import { generateAdminIndex } from './admin-index';
 
 async function main() {
 	const config = await loadConfig();
+	const collectionFiles = await fs.readdir('static/admin/collections');
+	const indexPath = 'static/admin/index.html';
+	const indexHtml = await fs.readFile(indexPath, 'utf8');
+	const generatedIndex = generateAdminIndex(indexHtml, collectionFiles);
+	if (generatedIndex !== indexHtml) await fs.writeFile(indexPath, generatedIndex);
 	const output = generateCollections(config);
 	const templateDir = 'src/lib/templates';
 	const available = (await fs.readdir(templateDir))
