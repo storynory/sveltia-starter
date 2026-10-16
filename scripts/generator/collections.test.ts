@@ -12,3 +12,12 @@ test('only explicitly opted-in folder collections have public routes', () => {
 	assert.match(output, /"navigation": \{[\s\S]*?"publicRoute": false/);
 	assert.doesNotMatch(output, /"settings": \{[\s\S]*?"publicRoute": true/);
 });
+
+test('generates independently configurable listing and detail templates', () => {
+	const output = generateCollections([
+		{ name: 'podcasts', folder: 'content/podcasts', public_route: true, template: 'podcast', list_template: 'episodes' },
+		{ name: 'posts', folder: 'content/posts', public_route: true, template: 'post' }
+	]);
+	assert.match(output, /"podcasts": \{[\s\S]*?"template": "podcast",[\s\S]*?"listTemplate": "episodes"/);
+	assert.match(output, /"posts": \{[\s\S]*?"listTemplate": "default"/);
+});
