@@ -1,6 +1,6 @@
 <script lang="ts">
 	import manifest from '#lib/generated/image-manifest.json';
-	import { pictureSources, type ImageManifest } from '#lib/images/picture';
+	import { pictureSources, type ImageManifest } from '#lib/images/picture.ts';
 
 	type Props = {
 		src: string;
