@@ -1,24 +1,35 @@
 <script lang="ts">
 	import type { DetailTemplateData } from './types';
+	import { relationLabel, relationLabels, textField } from './fields.ts';
 	import Picture from '#lib/components/Picture.svelte';
+
 	let { data }: { data: DetailTemplateData } = $props();
+	const item = $derived(data.item);
+	const title = $derived(data.title);
+	const date = $derived(textField(item, 'date'));
+	const author = $derived(relationLabel(item.author, 'name'));
+	const categoryLabel = $derived(relationLabel(item.category, 'title'));
+	const tags = $derived(relationLabels(item.tags, 'title'));
+	const featuredImage = $derived(textField(item, 'featuredImage'));
+	const featuredImageAlt = $derived(textField(item, 'featuredImageAlt'));
+	const html = $derived(textField(item, 'html'));
 </script>
 
 <article>
 	<header>
-		<h1>{data.title}</h1>
+		<h1>{title}</h1>
 		<div class="meta">
-			{#if data.date}<time>{data.date}</time>{/if}
-			{#if data.author}<span>By {data.author}</span>{/if}
-			{#if data.categoryLabel}<span>{data.categoryLabel}</span>{/if}
+			{#if date}<time>{date}</time>{/if}
+			{#if author}<span>By {author}</span>{/if}
+			{#if categoryLabel}<span>{categoryLabel}</span>{/if}
 		</div>
 	</header>
-	{#if data.featuredImage}
-		<Picture src={data.featuredImage} alt={data.featuredImageAlt || data.title} sizes="(min-width: 760px) 760px, 100vw" />
+	{#if featuredImage}
+		<Picture src={featuredImage} alt={featuredImageAlt || title} sizes="(min-width: 760px) 760px, 100vw" />
 	{/if}
-	<div class="content">{@html data.html}</div>
-	{#if data.tags.length}
-		<footer>{#each data.tags as tag}<span class="tag">{tag}</span>{/each}</footer>
+	<div class="content">{@html html}</div>
+	{#if tags.length}
+		<footer>{#each tags as tag}<span class="tag">{tag}</span>{/each}</footer>
 	{/if}
 </article>
 

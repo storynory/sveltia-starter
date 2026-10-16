@@ -1,11 +1,13 @@
 <script lang="ts">
 	import type { DetailTemplateData } from './types';
+	import { textField } from './fields.ts';
 	let { data }: { data: DetailTemplateData } = $props();
+	const html = $derived(textField(data.item, 'html'));
 </script>
 
 <article>
 	<h1>{data.title}</h1>
-	<div class="content">{@html data.html}</div>
+	<div class="content">{@html html}</div>
 </article>
 
 <style>
