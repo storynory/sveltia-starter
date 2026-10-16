@@ -4,9 +4,9 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"test": "tsx --test scripts/generator/*.test.ts scripts/images/*.test.ts",
+		"test": "tsx --test scripts/generator/*.test.ts scripts/images/*.test.ts src/lib/images/*.test.ts",
 		"test:routes": "tsx --test scripts/static-routes.test.ts",
-		"dev": "tsx scripts/generator/index.ts && vite dev",
+		"dev": "npm run images && tsx scripts/generator/index.ts && vite dev",
 		"build": "npm run images && tsx scripts/generator/index.ts && vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
