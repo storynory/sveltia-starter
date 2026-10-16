@@ -3,6 +3,8 @@
 export const collections = {
   "authors": {
     "kind": "folder",
+    "publicRoute": false,
+    "template": "default",
     "folder": "content/authors",
     "extension": "yml",
     "format": "yaml",
@@ -10,6 +12,8 @@ export const collections = {
   },
   "categories": {
     "kind": "folder",
+    "publicRoute": false,
+    "template": "default",
     "folder": "content/categories",
     "extension": "yml",
     "format": "yaml",
@@ -23,6 +27,8 @@ export const collections = {
   },
   "colour-schemes": {
     "kind": "folder",
+    "publicRoute": false,
+    "template": "default",
     "folder": "content/colour-schemes",
     "extension": "yml",
     "format": "yaml",
@@ -30,6 +36,8 @@ export const collections = {
   },
   "navigation": {
     "kind": "folder",
+    "publicRoute": false,
+    "template": "default",
     "folder": "content/navigation",
     "extension": "yml",
     "format": "yaml",
@@ -37,6 +45,8 @@ export const collections = {
   },
   "pages": {
     "kind": "folder",
+    "publicRoute": true,
+    "template": "page",
     "folder": "content/pages",
     "extension": "md",
     "format": "markdown",
@@ -44,6 +54,8 @@ export const collections = {
   },
   "posts": {
     "kind": "folder",
+    "publicRoute": true,
+    "template": "post",
     "folder": "content/posts",
     "extension": "md",
     "format": "markdown",
@@ -82,8 +94,35 @@ export const collections = {
       }
     ]
   },
+  "stories": {
+    "kind": "folder",
+    "publicRoute": true,
+    "template": "post",
+    "folder": "content/stories",
+    "extension": "md",
+    "format": "markdown",
+    "relations": {
+      "author": {
+        "collection": "authors",
+        "multiple": false,
+        "valueField": "{{slug}}"
+      },
+      "category": {
+        "collection": "categories",
+        "multiple": false,
+        "valueField": "{{slug}}"
+      },
+      "tags": {
+        "collection": "tags",
+        "multiple": true,
+        "valueField": "{{slug}}"
+      }
+    }
+  },
   "tags": {
     "kind": "folder",
+    "publicRoute": false,
+    "template": "default",
     "folder": "content/tags",
     "extension": "yml",
     "format": "yaml",
