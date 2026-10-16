@@ -11,16 +11,22 @@ export function inlinePicture(
 	title: string | null | undefined,
 	manifest: ImageManifest
 ): string {
+	// Editors can mark an important inline image with the Markdown title "priority=high".
+	// Other titles retain their normal visible tooltip.
+	const highPriority = title?.trim() === 'priority=high';
+	const visibleTitle = highPriority ? null : title;
 	const image = pictureSources(src, manifest);
 	const attrs = [
 		`src="${escapeAttribute(image.fallback)}"`,
 		`alt="${escapeAttribute(alt)}"`,
-		'title="' + escapeAttribute(title ?? '') + '"'
+		'title="' + escapeAttribute(visibleTitle ?? '') + '"'
 	];
-	if (!title) attrs.pop();
+	if (!visibleTitle) attrs.pop();
 	if (image.width) attrs.push(`width="${image.width}"`);
 	if (image.height) attrs.push(`height="${image.height}"`);
-	attrs.push('loading="lazy"', 'decoding="async"');
+	attrs.push(highPriority ? 'loading="eager"' : 'loading="lazy"');
+	if (highPriority) attrs.push('fetchpriority="high"');
+	attrs.push('decoding="async"');
 	const img = `<img ${attrs.join(' ')}>`;
 	if (!image.sources.length) return img;
 	// Post/Default templates: 760px content width, plus 24px padding on each side.
