@@ -12,5 +12,5 @@ export const load: PageServerLoad = async ({ params }) => {
 
 	const records = await getAll(collection);
 	const items = records.filter((record) => published(record as unknown as Record<string, unknown>));
-	return { collection, listTemplate: collections[collection].listTemplate, items };
+	return { collection, listTemplate: collections[collection].listTemplate, items: items as Record<string, unknown>[] };
 };
