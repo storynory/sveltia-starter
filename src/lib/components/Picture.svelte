@@ -7,6 +7,7 @@
 		alt: string;
 		sizes?: string;
 		loading?: 'lazy' | 'eager';
+		priority?: 'high' | 'auto';
 		fetchpriority?: 'high' | 'low' | 'auto';
 		class?: string;
 	};
@@ -15,12 +16,15 @@
 		src,
 		alt,
 		sizes = '100vw',
-		loading = 'lazy',
+		loading,
+		priority = 'auto',
 		fetchpriority,
 		class: className
 	}: Props = $props();
 
 	const image = $derived(pictureSources(src, manifest as ImageManifest));
+	const imageLoading = $derived(loading ?? (priority === 'high' ? 'eager' : 'lazy'));
+	const imagePriority = $derived(fetchpriority ?? (priority === 'high' ? 'high' : undefined));
 </script>
 
 <picture>
@@ -30,8 +34,8 @@
 	<img
 		src={image.fallback}
 		{alt}
-		{loading}
-		{fetchpriority}
+		loading={imageLoading}
+		fetchpriority={imagePriority}
 		class={className}
 		width={image.width}
 		height={image.height}
