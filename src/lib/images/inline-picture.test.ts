@@ -34,3 +34,10 @@ test('alt and title attributes are safely escaped', () => {
 	assert.match(html, /alt="A &quot;painting&quot; &lt;test&gt;"/);
 	assert.doesNotMatch(html, /" onerror="/);
 });
+
+test('editor can request high priority for an inline image', () => {
+	const html = inlinePicture('/uploads/mattise.jpg', 'Hero', 'priority=high', manifest);
+	assert.match(html, /loading="eager"/);
+	assert.match(html, /fetchpriority="high"/);
+	assert.doesNotMatch(html, /title="priority=high"/);
+});

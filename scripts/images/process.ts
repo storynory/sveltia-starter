@@ -6,6 +6,7 @@ import { isOriginalImage, plannedWidths, variantRelativePath } from './planning'
 
 type Format = 'webp' | 'avif';
 type Config = {
+	provider?: 'sharp' | 'original';
 	sourceDir: string; outputDir: string; publicBase: string; generatedBase: string;
 	inputExts: string[]; widths: number[];
 	formats: Record<Format, { enabled: boolean; quality: number }>;
@@ -21,6 +22,13 @@ export function cacheIsValid(cached: CacheEntry | undefined, digest: string): bo
 }
 export async function processImages(config: Config): Promise<Record<string, Entry>> {
 	const manifest: Record<string, Entry> = {};
+	if (config.provider && !['sharp', 'original'].includes(config.provider)) throw new Error(`Unsupported image provider: ${config.provider}`);
+	if (config.provider === 'original') {
+		await fs.mkdir(path.dirname(config.manifestFile), { recursive: true });
+		await fs.writeFile(config.manifestFile, '{}\n');
+		console.log('Images: original mode (Sharp skipped)');
+		return manifest;
+	}
 	const cachePath = config.cacheFile ?? '.image-cache.json';
 	let cache: Record<string, CacheEntry> = {};
 	try { cache = JSON.parse(await fs.readFile(cachePath, 'utf8')); } catch (err) {

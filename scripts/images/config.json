@@ -1,4 +1,5 @@
 {
+  "provider": "sharp",
   "sourceDir": "static/uploads",
   "outputDir": "static/optimized",
   "publicBase": "/uploads",
