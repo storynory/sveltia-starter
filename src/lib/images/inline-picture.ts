@@ -23,7 +23,9 @@ export function inlinePicture(
 	attrs.push('loading="lazy"', 'decoding="async"');
 	const img = `<img ${attrs.join(' ')}>`;
 	if (!image.sources.length) return img;
-	const sizes = '(min-width: 800px) 800px, 100vw';
+	// Default for the current article templates: 760px outer width with 24px padding per side.
+	// Keep this configurable when we add templates with different content widths.
+	const sizes = '(min-width: 760px) 712px, calc(100vw - 48px)';
 	const sources = image.sources.map((source) =>
 		`<source type="${source.type}" srcset="${escapeAttribute(source.srcset)}" sizes="${sizes}">`
 	).join('');
