@@ -58,6 +58,7 @@ export function generateCollections(input: CmsCollection[]) {
 		if (item.folder) {
 			collections[item.name] = {
 				kind: 'folder',
+				publicRoute: item.public_route === true,
 				folder: item.folder,
 				extension: item.extension ?? 'md',
 				format: formatOf(item.format),
