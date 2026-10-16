@@ -1,29 +1,14 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import { listTemplates } from '#lib/generated/list-templates.ts';
+
 	let { data }: { data: PageData } = $props();
+	const selected = $derived(data.listTemplate as keyof typeof listTemplates);
+	const Template = $derived(listTemplates[selected] ?? listTemplates.default);
 </script>
 
 <svelte:head>
 	<title>{data.collection}</title>
 </svelte:head>
 
-<main>
-	<h1>{data.collection}</h1>
-	{#if !data.items.length}
-		<p>No published content yet.</p>
-	{:else}
-		{#each data.items as item}
-			<article>
-				<h2><a href={`/${data.collection}/${item.slug}/`}>{item.title}</a></h2>
-				{#if item.excerpt}<p>{item.excerpt}</p>{/if}
-				{#if item.date}<small>{item.date}</small>{/if}
-			</article>
-		{/each}
-	{/if}
-</main>
-
-<style>
-	main { max-width: 900px; margin: 4rem auto; padding: 0 1.5rem; }
-	article { padding-bottom: 1.5rem; margin-bottom: 2rem; border-bottom: 1px solid #ddd; }
-	a { color: inherit; }
-</style>
+<Template {data} />
