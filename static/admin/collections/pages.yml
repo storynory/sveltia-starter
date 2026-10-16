@@ -2,6 +2,7 @@ collections:
   - name: pages
     label: Pages
     public_route: true
+    template: page
     folder: content/pages
     create: true
     slug: "{{slug}}"
