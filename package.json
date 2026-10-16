@@ -4,6 +4,7 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
+		"test": "tsx --test scripts/generator/*.test.ts",
 		"dev": "tsx scripts/generator/index.ts && vite dev",
 		"build": "tsx scripts/generator/index.ts && vite build",
 		"preview": "vite preview",
