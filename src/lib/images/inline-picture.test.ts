@@ -16,6 +16,7 @@ test('Markdown images use WebP sources and preserve meaningful alt text', async 
 	});
 	const html = await marked.parse('Look: ![A painting](/uploads/mattise.jpg "Gallery")');
 	assert.match(html, /<picture>/);
+	assert.match(html, /sizes="\(min-width: 808px\) 760px, calc\(100vw - 48px\)"/);
 	assert.match(html, /mattise\.320\.webp 320w/);
 	assert.match(html, /src="\/optimized\/mattise\.640\.jpg"/);
 	assert.match(html, /alt="A painting"/);

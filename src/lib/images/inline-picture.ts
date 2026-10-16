@@ -23,7 +23,9 @@ export function inlinePicture(
 	attrs.push('loading="lazy"', 'decoding="async"');
 	const img = `<img ${attrs.join(' ')}>`;
 	if (!image.sources.length) return img;
-	const sizes = '(min-width: 800px) 800px, 100vw';
+	// Post/Default templates: 760px content width, plus 24px padding on each side.
+	// Keep this configurable when we add templates with different content widths.
+	const sizes = '(min-width: 808px) 760px, calc(100vw - 48px)';
 	const sources = image.sources.map((source) =>
 		`<source type="${source.type}" srcset="${escapeAttribute(source.srcset)}" sizes="${sizes}">`
 	).join('');
