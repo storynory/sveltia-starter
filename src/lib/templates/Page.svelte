@@ -10,4 +10,6 @@
 
 <style>
 	main { max-width: 800px; margin: 4rem auto; padding: 0 1.5rem; line-height: 1.7; }
+	.content :global(picture) { display: block; max-width: 100%; }
+	.content :global(img) { display: block; max-width: 100%; height: auto; }
 </style>
