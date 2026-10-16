@@ -1,8 +1,17 @@
 import { error } from '@sveltejs/kit';
-import { readOne } from '#lib/content/read.ts';
+import { readAll, readOne } from '#lib/content/read.ts';
 import { renderMarkdown } from '#lib/content/render.ts';
 import { resolveRelations } from '#lib/content/relations.ts';
-import type { PageServerLoad } from './$types';
+import type { EntryGenerator, PageServerLoad } from './$types';
+
+// Prerender published posts only. Draft previews remain available in local development,
+// but are deliberately not included in the publicly deployed static site.
+export const entries: EntryGenerator = async () => {
+	const posts = await readAll('posts');
+	return posts
+		.filter((post) => post.data.draft !== true && post.meta.slug)
+		.map((post) => ({ slug: post.meta.slug! }));
+};
 
 export const load: PageServerLoad = async ({ params }) => {
 	const post = await readOne('posts', params.slug);
