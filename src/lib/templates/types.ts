@@ -1,11 +1,9 @@
+/** Every public collection is passed as an intact record.
+ * Individual templates interpret the fields required by their own content type.
+ */
 export type DetailTemplateData = {
 	title: string;
-	html: string;
-	date: string;
 	collection: string;
-	author: string;
-	categoryLabel: string;
-	tags: string[];
-	featuredImage: string;
-	featuredImageAlt: string;
+	template: string;
+	item: Record<string, unknown>;
 };
