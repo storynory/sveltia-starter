@@ -1,0 +1,9 @@
+title: About Panel
+type: panel
+heading: Built for simple publishing
+introduction: A lightweight website with content you can edit in Sveltia.
+image: ''
+imageAlt: ''
+imagePosition: right
+buttonText: Learn More
+buttonUrl: /pages/about/
