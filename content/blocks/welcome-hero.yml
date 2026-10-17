@@ -1,0 +1,8 @@
+title: Welcome Hero
+type: hero
+heading: Welcome to our website
+introduction: Explore the latest posts and podcasts.
+image: ''
+imageAlt: ''
+buttonText: Browse Posts
+buttonUrl: /posts/
