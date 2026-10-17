@@ -29,7 +29,7 @@ collections:
       - name: collection
         label: Collection for Latest / Featured
         widget: select
-        options: [posts, stories, podcasts]
+        options: [posts, podcasts]
         required: false
         hint: Selected can include items from different collections.
       - name: category
@@ -68,7 +68,7 @@ collections:
         widget: list
         required: false
         collapsed: true
-        hint: Add a Post, Story or Podcast and search for its title.
+        hint: Add a Post or Podcast and search for its title.
         types:
           - name: posts
             label: Post
@@ -78,17 +78,6 @@ collections:
                 label: Choose Post
                 widget: relation
                 collection: posts
-                value_field: "{{slug}}"
-                search_fields: [title]
-                display_fields: [title]
-          - name: stories
-            label: Story
-            widget: object
-            fields:
-              - name: slug
-                label: Choose Story
-                widget: relation
-                collection: stories
                 value_field: "{{slug}}"
                 search_fields: [title]
                 display_fields: [title]
