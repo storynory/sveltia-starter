@@ -10,7 +10,7 @@ test('blocks stay reusable and private, with a homepage record ordering them', a
 	assert.ok(blocks?.folder);
 	assert.equal(blocks.public_route, undefined);
 	assert.ok(homepage?.files?.some((entry) => entry.name === 'home'));
-	const references = homepage.files?.find((entry) => entry.name === 'home')?.fields?.find((field) => field.name === 'blocks');
+	const references = homepage?.files?.find((entry) => entry.name === 'home')?.fields?.find((field) => field.name === 'blocks');
 	assert.equal(references?.collection, 'blocks');
 	assert.equal(references?.multiple, true);
 	for (const field of ['type', 'heading', 'introduction', 'collection', 'category', 'tags', 'tagMatch', 'limit', 'items']) {
