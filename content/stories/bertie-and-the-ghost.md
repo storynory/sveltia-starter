@@ -8,7 +8,7 @@ category: bertie-stories
 tags: []
 showOnHome: true
 featured: false
-featuredImage: ''
+featuredImage: /uploads/mattise.jpg
 featuredImageAlt: ''
 seo: null
 ---

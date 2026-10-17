@@ -1,5 +1,9 @@
 ---
 title: About Us
+excerpt: ''
+layout: standard
+blocks:
+  - china
 description: Welcome to our new website.
 ---
 
