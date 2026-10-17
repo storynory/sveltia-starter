@@ -72,8 +72,8 @@ export async function buildBlock(slug: string): Promise<RenderedBlock | null> {
 			if (!entry || typeof entry !== 'object') continue;
 			const choice = entry as Data;
 			// Sveltia variable-type list stores { type: 'stories', slug: '...' }.
-\t\t\t// Continue accepting older { collection, slug } records as well.
-\t\t\tconst collection = publicCollection(value(choice, 'type') || value(choice, 'collection'));
+			// Continue accepting older { collection, slug } records as well.
+			const collection = publicCollection(value(choice, 'type') || value(choice, 'collection'));
 			const selectedSlug = value(choice, 'slug');
 			if (!collection || !selectedSlug) continue;
 			const item = await getOne(collection, selectedSlug);
