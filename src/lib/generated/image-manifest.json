@@ -1,0 +1,54 @@
+{
+  "/uploads/mattise.jpg": {
+    "width": 1920,
+    "height": 1080,
+    "sizes": [
+      320,
+      640,
+      960
+    ],
+    "formats": [
+      "webp"
+    ],
+    "fallback": "/optimized/mattise.640.jpg"
+  },
+  "/uploads/music-cropped.png": {
+    "width": 988,
+    "height": 667,
+    "sizes": [
+      320,
+      640,
+      960
+    ],
+    "formats": [
+      "webp"
+    ],
+    "fallback": "/optimized/music-cropped.640.jpg"
+  },
+  "/uploads/Northern-Lights.jpg": {
+    "width": 1450,
+    "height": 967,
+    "sizes": [
+      320,
+      640,
+      960
+    ],
+    "formats": [
+      "webp"
+    ],
+    "fallback": "/optimized/Northern-Lights.640.jpg"
+  },
+  "/uploads/vlcsnap-11937.jpg": {
+    "width": 1024,
+    "height": 476,
+    "sizes": [
+      320,
+      640,
+      960
+    ],
+    "formats": [
+      "webp"
+    ],
+    "fallback": "/optimized/vlcsnap-11937.640.jpg"
+  }
+}

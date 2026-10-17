@@ -1,19 +1,32 @@
 // Generated automatically. Do not edit.
 
 export const collections = {
-  "authors": {
+  "blocks": {
     "kind": "folder",
     "publicRoute": false,
     "template": "default",
-    "folder": "content/authors",
+    "listTemplate": "default",
+    "folder": "content/blocks",
     "extension": "yml",
     "format": "yaml",
-    "relations": {}
+    "relations": {
+      "category": {
+        "collection": "categories",
+        "multiple": false,
+        "valueField": "{{slug}}"
+      },
+      "tags": {
+        "collection": "tags",
+        "multiple": true,
+        "valueField": "{{slug}}"
+      }
+    }
   },
   "categories": {
     "kind": "folder",
     "publicRoute": false,
     "template": "default",
+    "listTemplate": "default",
     "folder": "content/categories",
     "extension": "yml",
     "format": "yaml",
@@ -29,15 +42,34 @@ export const collections = {
     "kind": "folder",
     "publicRoute": false,
     "template": "default",
+    "listTemplate": "default",
     "folder": "content/colour-schemes",
     "extension": "yml",
     "format": "yaml",
     "relations": {}
   },
+  "homepage": {
+    "kind": "files",
+    "files": [
+      {
+        "name": "home",
+        "file": "content/homepage/home.yml",
+        "format": "yaml",
+        "relations": {
+          "blocks": {
+            "collection": "blocks",
+            "multiple": true,
+            "valueField": "{{slug}}"
+          }
+        }
+      }
+    ]
+  },
   "navigation": {
     "kind": "folder",
     "publicRoute": false,
     "template": "default",
+    "listTemplate": "default",
     "folder": "content/navigation",
     "extension": "yml",
     "format": "yaml",
@@ -47,21 +79,80 @@ export const collections = {
     "kind": "folder",
     "publicRoute": true,
     "template": "page",
+    "listTemplate": "default",
     "folder": "content/pages",
     "extension": "md",
     "format": "markdown",
+    "relations": {
+      "blocks": {
+        "collection": "blocks",
+        "multiple": true,
+        "valueField": "{{slug}}"
+      }
+    }
+  },
+  "people": {
+    "kind": "folder",
+    "publicRoute": false,
+    "template": "default",
+    "listTemplate": "default",
+    "folder": "content/people",
+    "extension": "yml",
+    "format": "yaml",
     "relations": {}
+  },
+  "podcasts": {
+    "kind": "folder",
+    "publicRoute": true,
+    "template": "podcast",
+    "listTemplate": "episodes",
+    "folder": "content/podcasts",
+    "extension": "md",
+    "format": "markdown",
+    "relations": {
+      "author": {
+        "collection": "people",
+        "multiple": false,
+        "valueField": "{{slug}}"
+      },
+      "narrator": {
+        "collection": "people",
+        "multiple": false,
+        "valueField": "{{slug}}"
+      },
+      "presenter": {
+        "collection": "people",
+        "multiple": false,
+        "valueField": "{{slug}}"
+      },
+      "producer": {
+        "collection": "people",
+        "multiple": false,
+        "valueField": "{{slug}}"
+      },
+      "category": {
+        "collection": "categories",
+        "multiple": false,
+        "valueField": "{{slug}}"
+      },
+      "tags": {
+        "collection": "tags",
+        "multiple": true,
+        "valueField": "{{slug}}"
+      }
+    }
   },
   "posts": {
     "kind": "folder",
     "publicRoute": true,
     "template": "post",
+    "listTemplate": "default",
     "folder": "content/posts",
     "extension": "md",
     "format": "markdown",
     "relations": {
       "author": {
-        "collection": "authors",
+        "collection": "people",
         "multiple": false,
         "valueField": "{{slug}}"
       },
@@ -98,12 +189,13 @@ export const collections = {
     "kind": "folder",
     "publicRoute": true,
     "template": "post",
+    "listTemplate": "default",
     "folder": "content/stories",
     "extension": "md",
     "format": "markdown",
     "relations": {
       "author": {
-        "collection": "authors",
+        "collection": "people",
         "multiple": false,
         "valueField": "{{slug}}"
       },
@@ -123,6 +215,7 @@ export const collections = {
     "kind": "folder",
     "publicRoute": false,
     "template": "default",
+    "listTemplate": "default",
     "folder": "content/tags",
     "extension": "yml",
     "format": "yaml",

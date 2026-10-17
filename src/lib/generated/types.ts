@@ -1,10 +1,16 @@
 // Generated automatically from Sveltia collection YAML. Do not edit.
 
-export type AuthorsContent = {
-	"name": string;
-	"bio"?: string;
-	"photo"?: string;
-	"website"?: string;
+export type BlocksContent = {
+	"title": string;
+	"type": "selected" | "latest" | "featured";
+	"heading"?: string;
+	"introduction"?: string;
+	"collection"?: "posts" | "stories" | "podcasts";
+	"category"?: string;
+	"tags"?: string[];
+	"tagMatch"?: "any" | "all";
+	"limit"?: number;
+	"items"?: unknown[];
 };
 
 export type CategoriesContent = {
@@ -27,6 +33,11 @@ export type ColourSchemesContent = {
 	"text": string;
 };
 
+export type HomepageHomeContent = {
+	"title": string;
+	"blocks"?: string[];
+};
+
 export type NavigationContent = {
 	"title": string;
 	"items"?: {
@@ -43,7 +54,45 @@ export type NavigationContent = {
 
 export type PagesContent = {
 	"title": string;
-	"body": string;
+	"excerpt"?: string;
+	"layout"?: "standard" | "wide";
+	"body"?: string;
+	"blocks"?: string[];
+};
+
+export type PeopleContent = {
+	"name": string;
+	"roles"?: ("Author" | "Narrator" | "Presenter" | "Producer" | "Editor" | "Illustrator" | "Composer" | "Other")[];
+	"bio"?: string;
+	"photo"?: string;
+	"website"?: string;
+};
+
+export type PodcastsContent = {
+	"title": string;
+	"body"?: string;
+	"description"?: string;
+	"date": string;
+	"draft": boolean;
+	"episodeNumber"?: number;
+	"seasonNumber"?: number;
+	"audio"?: string;
+	"length"?: number;
+	"duration"?: string;
+	"author"?: string;
+	"narrator"?: string;
+	"presenter"?: string;
+	"producer"?: string;
+	"featuredImage"?: string;
+	"featuredImageAlt"?: string;
+	"category"?: string;
+	"tags"?: string[];
+	"showOnHome"?: boolean;
+	"featured"?: boolean;
+	"seo"?: {
+		"title"?: string;
+		"description"?: string;
+	};
 };
 
 export type PostsContent = {
@@ -117,11 +166,16 @@ export type TagsContent = {
 };
 
 export type ContentByCollection = {
-	"authors": AuthorsContent;
+	"blocks": BlocksContent;
 	"categories": CategoriesContent;
 	"colour-schemes": ColourSchemesContent;
+	"homepage": {
+		"home": HomepageHomeContent;
+	};
 	"navigation": NavigationContent;
 	"pages": PagesContent;
+	"people": PeopleContent;
+	"podcasts": PodcastsContent;
 	"posts": PostsContent;
 	"settings": {
 		"general": SettingsGeneralContent;
