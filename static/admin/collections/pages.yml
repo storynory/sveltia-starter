@@ -11,6 +11,33 @@ collections:
         label: Title
         widget: string
 
+      - name: excerpt
+        label: Excerpt
+        widget: text
+        required: false
+
+      - name: layout
+        label: Page Layout
+        widget: select
+        options:
+          - { label: Standard, value: standard }
+          - { label: Wide, value: wide }
+        default: standard
+        required: false
+        hint: A presentation choice for this page, independent of the collection template.
+
       - name: body
         label: Content
         widget: richtext
+        required: false
+
+      - name: blocks
+        label: Reusable Blocks
+        widget: relation
+        collection: blocks
+        value_field: "{{slug}}"
+        search_fields: [title]
+        display_fields: [title]
+        multiple: true
+        required: false
+        hint: Select existing blocks and drag to arrange their order.
