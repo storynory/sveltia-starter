@@ -18,6 +18,7 @@ export type RenderedBlock = {
 	introduction: string;
 	image: string;
 	imageAlt: string;
+	imagePosition: string;
 	buttonText: string;
 	buttonUrl: string;
 	items: BlockItem[];
@@ -104,6 +105,7 @@ export async function buildBlock(slug: string): Promise<RenderedBlock | null> {
 		introduction: value(settings, 'introduction'),
 		image: value(settings, 'image'),
 		imageAlt: value(settings, 'imageAlt'),
+		imagePosition: value(settings, 'imagePosition'),
 		buttonText: value(settings, 'buttonText'),
 		buttonUrl: value(settings, 'buttonUrl'),
 		items: records

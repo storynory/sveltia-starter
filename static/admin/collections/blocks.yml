@@ -17,7 +17,7 @@ collections:
       - name: type
         label: Block Type
         widget: select
-        options: [selected, latest, featured, hero]
+        options: [selected, latest, featured, hero, panel]
       - name: heading
         label: Display Heading
         widget: string
@@ -27,12 +27,18 @@ collections:
         widget: text
         required: false
       - name: image
-        label: Hero Image
+        label: Image (Hero / Panel)
         widget: image
         required: false
       - name: imageAlt
-        label: Hero Image Description
+        label: Image Description
         widget: string
+        required: false
+      - name: imagePosition
+        label: Panel Image Position
+        widget: select
+        options: [left, right]
+        default: right
         required: false
       - name: buttonText
         label: Button Text
