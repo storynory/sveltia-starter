@@ -26,7 +26,10 @@ test('Selected items offer searchable relations for each public content type', a
 	const items = blocks?.fields?.find((field) => field.name === 'items');
 	assert.equal(items?.widget, 'list');
 	for (const collection of ['posts', 'stories', 'podcasts']) {
-		const option = (items as unknown as { types?: { name: string; fields: { name: string; widget: string; collection: string }[] }[] })?.types?.find((type) => type.name === collection);
+		const variants = items as unknown as {
+			types?: { name: string; fields: { name: string; widget: string; collection: string }[] }[];
+		} | undefined;
+		const option = variants?.types?.find((entry) => entry.name === collection);
 		assert.ok(option, collection);
 		assert.equal(option.fields[0]?.widget, 'relation');
 		assert.equal(option.fields[0]?.collection, collection);
