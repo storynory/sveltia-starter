@@ -50,8 +50,8 @@
 </section>
 
 <style>
-	section { margin: 2.5rem 0; }
-	.panel-layout { display: grid; gap: 2rem; align-items: center; }
+	section { margin: 2.5em 0; }
+	.panel-layout { display: grid; gap: var(--space); align-items: center; }
 	@media (min-width: 700px) {
 		.panel-layout:has(.panel-image) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 		.panel-layout.image-left .panel-image { grid-column: 1; grid-row: 1; }
@@ -59,14 +59,14 @@
 	}
 	.panel-image :global(img) { display: block; width: 100%; height: auto; }
 	.panel-image :global(picture) { display: block; }
-	.hero { padding: 2rem; background: var(--gray); border-radius: var(--radius); }
-	.hero :global(picture) { display: block; margin: 1.5rem 0; }
+	.hero { padding: 1.5em; background: var(--gray); border-radius: var(--radius); }
+	.hero :global(picture) { display: block; margin: 1.5em 0; }
 	.hero :global(img) { display: block; width: 100%; height: auto; }
-	.button { display: inline-block; padding: 0.75rem 1.25rem; border-radius: 0.4rem; background: var(--accent); color: white; text-decoration: none; }
+	.button { display: inline-block; padding: 0.75em 1.25em; border-radius: var(--radius); background: var(--accent); color: white; text-decoration: none; }
 	.button:hover { filter: brightness(0.85); }
-	h2 { font-size: 2rem; }
-	.intro { margin-bottom: 1.5rem; }
-	.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 1.5rem; }
+	h2 { font-size: calc(var(--font-size) * var(--font-scale) * var(--font-scale)); }
+	.intro { margin-bottom: 1.5em; }
+	.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: var(--space); }
 	article { min-width: 0; }
 	article :global(img) { max-width: 100%; height: auto; }
 	article :global(picture) { display: block; }
