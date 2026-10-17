@@ -13,8 +13,13 @@ export type BlockItem = {
 
 export type RenderedBlock = {
 	slug: string;
+	type: string;
 	heading: string;
 	introduction: string;
+	image: string;
+	imageAlt: string;
+	buttonText: string;
+	buttonUrl: string;
 	items: BlockItem[];
 };
 
@@ -94,7 +99,17 @@ export async function buildBlock(slug: string): Promise<RenderedBlock | null> {
 				.slice(0, limit);
 		}
 	}
-	return { slug, heading: value(settings, 'heading') || value(settings, 'title'), introduction: value(settings, 'introduction'), items: records };
+	return {
+		slug,
+		type,
+		heading: value(settings, 'heading') || value(settings, 'title'),
+		introduction: value(settings, 'introduction'),
+		image: value(settings, 'image'),
+		imageAlt: value(settings, 'imageAlt'),
+		buttonText: value(settings, 'buttonText'),
+		buttonUrl: value(settings, 'buttonUrl'),
+		items: records
+	};
 }
 
 /** Resolve an ordered list of block relations from a Page or other record. */
