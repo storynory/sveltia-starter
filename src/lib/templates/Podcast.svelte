@@ -16,6 +16,7 @@
 	const author = $derived(relationLabel(item.author, 'name'));
 	const presenter = $derived(relationLabel(item.presenter, 'name'));
 	const producer = $derived(relationLabel(item.producer, 'name'));
+	const description = $derived(textField(item, 'description'));
 	const html = $derived(textField(item, 'html'));
 </script>
 
@@ -52,6 +53,7 @@
 		</div>
 	{/if}
 
+	{#if description}<p class="description">{description}</p>{/if}
 	{#if html}<div class="content">{@html html}</div>{/if}
 </article>
 
@@ -62,6 +64,7 @@
 	.player { margin: 1.5rem 0; }
 	audio { display: block; width: 100%; }
 	.player p { margin: .5rem 0 0; }
+	.description { white-space: pre-line; }
 	.credits { margin: 1.5rem 0; }
 	.credits p { margin: .2rem 0; }
 	.content :global(picture) { display: block; max-width: 100%; }
