@@ -1,9 +1,9 @@
 
 collections:
-  - name: authors
-    label: Authors
-    label_singular: Author
-    folder: content/authors
+  - name: people
+    label: People
+    label_singular: Person
+    folder: content/people
     create: true
     extension: yml
     format: yaml
@@ -12,9 +12,17 @@ collections:
 
     fields:
       - name: name
-        label: Author Name
+        label: Full Name
         widget: string
         required: true
+
+      - name: roles
+        label: Roles
+        widget: select
+        multiple: true
+        required: false
+        options: [Author, Narrator, Presenter, Producer, Editor, Illustrator, Composer, Other]
+        hint: A person can have more than one role.
 
       - name: bio
         label: Biography
@@ -22,7 +30,7 @@ collections:
         required: false
 
       - name: photo
-        label: Author Photo
+        label: Photo
         widget: image
         required: false
 
