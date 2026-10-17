@@ -1,0 +1,81 @@
+collections:
+  - name: blocks
+    label: Blocks
+    label_singular: Block
+    icon: blocks
+    folder: content/blocks
+    create: true
+    extension: yml
+    format: yaml
+    slug: "{{slug}}"
+    identifier_field: title
+    summary: "{{title}} — {{type}}"
+    fields:
+      - name: title
+        label: Internal Name
+        widget: string
+      - name: type
+        label: Block Type
+        widget: select
+        options: [selected, latest, featured]
+      - name: heading
+        label: Display Heading
+        widget: string
+        required: false
+      - name: introduction
+        label: Introduction
+        widget: text
+        required: false
+      - name: collection
+        label: Collection for Latest / Featured
+        widget: select
+        options: [posts, stories, podcasts]
+        required: false
+        hint: Selected can include items from different collections.
+      - name: category
+        label: Category Filter
+        widget: relation
+        collection: categories
+        value_field: "{{slug}}"
+        search_fields: [title]
+        display_fields: [title]
+        required: false
+      - name: tags
+        label: Tag Filters
+        widget: relation
+        collection: tags
+        value_field: "{{slug}}"
+        search_fields: [title]
+        display_fields: [title]
+        multiple: true
+        required: false
+      - name: tagMatch
+        label: Match Tags
+        widget: select
+        options: [any, all]
+        default: any
+        required: false
+      - name: limit
+        label: Maximum Items
+        widget: number
+        min: 1
+        max: 30
+        value_type: int
+        default: 4
+        required: false
+      - name: items
+        label: Selected Items (in display order)
+        widget: list
+        required: false
+        collapsed: true
+        summary: "{{fields.collection}} / {{fields.slug}}"
+        hint: Used by Selected blocks. Choose collection and enter the content slug.
+        fields:
+          - name: collection
+            label: Collection
+            widget: select
+            options: [posts, stories, podcasts]
+          - name: slug
+            label: Slug
+            widget: string
+            hint: Filename without .md
