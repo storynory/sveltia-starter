@@ -7,7 +7,7 @@ test('blocks stay reusable and private, with a homepage record ordering them', a
 	const config = await loadConfig();
 	const blocks = config.find((entry) => entry.name === 'blocks');
 	for (const field of ['type', 'heading', 'introduction', 'collection', 'category', 'tags', 'tagMatch', 'limit', 'items']) {
-		assert.ok(blocks.fields?.some((entry) => entry.name === field), field);
+		assert.ok(blocks?.fields?.some((entry) => entry.name === field), field);
 	}
 	const generated = generateCollections(config);
 	assert.match(generated, /"blocks": \{[\s\S]*?"publicRoute": false/);
