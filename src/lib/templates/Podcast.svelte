@@ -58,8 +58,8 @@
 </article>
 
 <style>
-	article { max-width: 760px; margin: 4rem auto; padding: 0 1.5rem; line-height: 1.7; }
-	h1 { font-size: 2.5rem; line-height: 1.2; }
+	article { max-width: var(--content-width); margin: 3em auto; padding: 0 var(--space); line-height: 1.7; }
+	h1 { font-size: calc(var(--font-size) * var(--font-scale) * var(--font-scale) * var(--font-scale)); line-height: 1.2; }
 	.meta { display: flex; gap: 1rem; flex-wrap: wrap; color: #666; margin-bottom: 1.5rem; }
 	.player { margin: 1.5rem 0; }
 	audio { display: block; width: 100%; }
