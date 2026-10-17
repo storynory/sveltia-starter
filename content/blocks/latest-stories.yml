@@ -1,7 +1,7 @@
-title: Latest Stories
+title: Latest Posts
 type: latest
-heading: Latest Stories
-introduction: Discover our newest stories.
-collection: stories
+heading: Latest Posts
+introduction: Discover our newest posts.
+collection: posts
 limit: 4
 tagMatch: any
