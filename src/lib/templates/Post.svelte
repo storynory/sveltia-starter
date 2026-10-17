@@ -34,11 +34,11 @@
 </article>
 
 <style>
-	article { max-width: var(--content-width); margin: 3em auto; padding: 0 var(--space); line-height: 1.7; }
+	article { max-width: var(--content-width); margin: 3em auto; padding: 0 var(--space); line-height: var(--line-height); }
 	h1 { font-size: calc(var(--font-size) * var(--font-scale) * var(--font-scale) * var(--font-scale)); line-height: 1.2; }
-	.meta { display: flex; flex-wrap: wrap; gap: 1rem; color: #666; margin-bottom: 2rem; }
+	.meta { display: flex; flex-wrap: wrap; gap: 1rem; color: var(--text); margin-bottom: 2rem; }
 	footer { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 2rem; }
-	.tag { background: #eee; border-radius: 1rem; padding: .25rem .75rem; }
+	.tag { background: var(--gray); border-radius: 1rem; padding: .25rem .75rem; }
 	.content :global(picture) { display: block; max-width: 100%; }
 	.content :global(img) { display: block; max-width: 100%; height: auto; }
 </style>
