@@ -6,11 +6,12 @@ import { generateCollections } from './collections';
 test('blocks stay reusable and private, with a homepage record ordering them', async () => {
 	const config = await loadConfig();
 	const blocks = config.find((entry) => entry.name === 'blocks');
-	for (const field of ['type', 'heading', 'introduction', 'collection', 'category', 'tags', 'tagMatch', 'limit', 'items', 'image', 'imageAlt', 'buttonText', 'buttonUrl']) {
+	for (const field of ['type', 'heading', 'introduction', 'collection', 'category', 'tags', 'tagMatch', 'limit', 'items', 'image', 'imageAlt', 'imagePosition', 'buttonText', 'buttonUrl']) {
 		assert.ok(blocks?.fields?.some((entry) => entry.name === field), field);
 	}
 	const type = blocks?.fields?.find((entry) => entry.name === 'type');
 	assert.ok(type?.options?.includes('hero'));
+	assert.ok(type?.options?.includes('panel'));
 	const generated = generateCollections(config);
 	assert.match(generated, /"blocks": \{[\s\S]*?"publicRoute": false/);
 });
