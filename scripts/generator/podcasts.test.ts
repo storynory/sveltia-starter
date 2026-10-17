@@ -11,7 +11,7 @@ test('podcasts have independent templates, RSS metadata and People relationships
 	assert.equal(podcasts.public_route, true);
 	assert.equal(podcasts.template, 'podcast');
 	assert.equal(podcasts.list_template, 'episodes');
-	for (const name of ['audio', 'length', 'duration', 'episodeNumber']) {
+	for (const name of ['audio', 'length', 'duration', 'episodeNumber', 'description', 'featuredImage']) {
 		assert.ok(podcasts.fields?.some((field) => field.name === name));
 	}
 	for (const name of ['author', 'narrator', 'presenter', 'producer']) {
