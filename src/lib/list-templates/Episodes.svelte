@@ -26,7 +26,7 @@
 						{#if textField(episode, 'duration')}<span>{textField(episode, 'duration')}</span>{/if}
 						{#if relationLabel(episode.narrator, 'name')}<span>Narrated by {relationLabel(episode.narrator, 'name')}</span>{/if}
 					</p>
-					{#if textField(episode, 'excerpt')}<p>{textField(episode, 'excerpt')}</p>{/if}
+					{#if textField(episode, 'description')}<p>{textField(episode, 'description')}</p>{/if}
 				</div>
 			</article>
 		{/each}
