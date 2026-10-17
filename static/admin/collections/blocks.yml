@@ -17,7 +17,7 @@ collections:
       - name: type
         label: Block Type
         widget: select
-        options: [selected, latest, featured]
+        options: [selected, latest, featured, hero]
       - name: heading
         label: Display Heading
         widget: string
@@ -26,6 +26,23 @@ collections:
         label: Introduction
         widget: text
         required: false
+      - name: image
+        label: Hero Image
+        widget: image
+        required: false
+      - name: imageAlt
+        label: Hero Image Description
+        widget: string
+        required: false
+      - name: buttonText
+        label: Button Text
+        widget: string
+        required: false
+      - name: buttonUrl
+        label: Button Link
+        widget: string
+        required: false
+        hint: Use a site path such as /posts/ or a full URL.
       - name: collection
         label: Collection for Latest / Featured
         widget: select
