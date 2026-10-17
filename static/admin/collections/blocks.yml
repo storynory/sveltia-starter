@@ -64,18 +64,42 @@ collections:
         default: 4
         required: false
       - name: items
-        label: Selected Items (in display order)
+        label: Selected Items (drag to reorder)
         widget: list
         required: false
         collapsed: true
-        summary: "{{fields.collection}} / {{fields.slug}}"
-        hint: Used by Selected blocks. Choose collection and enter the content slug.
-        fields:
-          - name: collection
-            label: Collection
-            widget: select
-            options: [posts, stories, podcasts]
-          - name: slug
-            label: Slug
-            widget: string
-            hint: Filename without .md
+        hint: Add a Post, Story or Podcast and search for its title.
+        types:
+          - name: posts
+            label: Post
+            widget: object
+            fields:
+              - name: slug
+                label: Choose Post
+                widget: relation
+                collection: posts
+                value_field: "{{slug}}"
+                search_fields: [title]
+                display_fields: [title]
+          - name: stories
+            label: Story
+            widget: object
+            fields:
+              - name: slug
+                label: Choose Story
+                widget: relation
+                collection: stories
+                value_field: "{{slug}}"
+                search_fields: [title]
+                display_fields: [title]
+          - name: podcasts
+            label: Podcast
+            widget: object
+            fields:
+              - name: slug
+                label: Choose Podcast
+                widget: relation
+                collection: podcasts
+                value_field: "{{slug}}"
+                search_fields: [title]
+                display_fields: [title]
