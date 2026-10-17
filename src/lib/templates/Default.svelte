@@ -11,7 +11,7 @@
 </article>
 
 <style>
-	article { max-width: 760px; margin: 4rem auto; padding: 0 1.5rem; line-height: 1.7; }
+	article { max-width: var(--content-width); margin: 3em auto; padding: 0 var(--space); line-height: var(--line-height); }
 	.content :global(picture) { display: block; max-width: 100%; }
 	.content :global(img) { display: block; max-width: 100%; height: auto; }
 </style>

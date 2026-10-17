@@ -58,9 +58,9 @@
 </article>
 
 <style>
-	article { max-width: var(--content-width); margin: 3em auto; padding: 0 var(--space); line-height: 1.7; }
+	article { max-width: var(--content-width); margin: 3em auto; padding: 0 var(--space); line-height: var(--line-height); }
 	h1 { font-size: calc(var(--font-size) * var(--font-scale) * var(--font-scale) * var(--font-scale)); line-height: 1.2; }
-	.meta { display: flex; gap: 1rem; flex-wrap: wrap; color: #666; margin-bottom: 1.5rem; }
+	.meta { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--text); margin-bottom: 1.5rem; }
 	.player { margin: 1.5rem 0; }
 	audio { display: block; width: 100%; }
 	.player p { margin: .5rem 0 0; }

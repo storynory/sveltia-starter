@@ -25,7 +25,7 @@
 </main>
 
 <style>
-	main { max-width: 900px; margin: 4rem auto; padding: 0 1.5rem; }
-	article { padding-bottom: 1.5rem; margin-bottom: 2rem; border-bottom: 1px solid #ddd; }
-	a { color: inherit; }
+	main { max-width: var(--wide-width); margin: 3em auto; padding: 0 var(--space); }
+	article { padding-bottom: 1.5em; margin-bottom: 2em; border-bottom: 1px solid var(--prime); }
+	a { color: var(--accent); }
 </style>
