@@ -1,18 +1,43 @@
+/* A small global design vocabulary. Sveltia supplies the colour variables. */
 :root {
 	--font-body: system-ui, -apple-system, 'Segoe UI', sans-serif;
 	--font-heading: var(--font-body);
-	--content-width: 800px;
-	--wide-width: 1100px;
+	--font-size: 1.0625rem;
+	--font-scale: 1.2;
+	--line-height: 1.6;
 	--space: 1.5rem;
+	--content-width: 50rem;
+	--wide-width: 68.75rem;
 	--radius: 0.75rem;
 }
 
+* { box-sizing: border-box; }
+
 body {
 	margin: 0;
-	font-family: var(--font-body);
-	line-height: 1.6;
+	font: var(--font-size) / var(--line-height) var(--font-body);
 }
 
-h1, h2, h3 { font-family: var(--font-heading); line-height: 1.25; }
+h1, h2, h3 {
+	font-family: var(--font-heading);
+	line-height: 1.25;
+}
+
+h1 { font-size: calc(var(--font-size) * var(--font-scale) * var(--font-scale) * var(--font-scale)); }
+h2 { font-size: calc(var(--font-size) * var(--font-scale) * var(--font-scale)); }
+h3 { font-size: calc(var(--font-size) * var(--font-scale)); }
+
 a { color: var(--accent); }
 img { max-width: 100%; }
+
+/* A few repeatable helpers, not a utility framework. */
+.bg-prime { background-color: var(--prime); }
+.bg-accent { background-color: var(--accent); }
+.bg-light { background-color: var(--second); }
+.bg-gray { background-color: var(--gray); }
+.txt-accent { color: var(--accent); }
+.txt-center { text-align: center; }
+.-p { padding: 0.5em; }
+.-p-lg { padding: 1em; }
+.-m-b { margin-bottom: 1em; }
+.-m-y { margin-block: 1em; }
