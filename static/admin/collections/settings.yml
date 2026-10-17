@@ -51,6 +51,16 @@ collections:
             widget: string
             default: en-GB
 
+          - name: homePage
+            label: Home Page
+            widget: relation
+            collection: pages
+            value_field: "{{slug}}"
+            search_fields: [title]
+            display_fields: [title]
+            required: true
+            hint: Choose the Page shown at the root URL.
+
           - name: activeScheme
             label: Active Colour Scheme
             widget: relation

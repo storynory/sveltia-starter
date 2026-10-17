@@ -1,5 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { collections } from '#lib/generated/collections.ts';
+import { homePageSlug } from '#lib/server/home.ts';
 import { getAll } from '#lib/server/content.ts';
 import { publicCollection, publicCollections, published } from '#lib/server/public-routes.ts';
 import type { EntryGenerator, PageServerLoad } from './$types';
@@ -11,6 +12,7 @@ export const load: PageServerLoad = async ({ params }) => {
 	if (!collection) error(404, 'Collection not found');
 
 	const records = await getAll(collection);
-	const items = records.filter((record) => published(record as unknown as Record<string, unknown>));
+	const home = collection === 'pages' ? await homePageSlug() : null;
+	const items = records.filter((record) => published(record as unknown as Record<string, unknown>) && !(home && record.slug === home));
 	return { collection, listTemplate: collections[collection].listTemplate, items: items as Record<string, unknown>[] };
 };
