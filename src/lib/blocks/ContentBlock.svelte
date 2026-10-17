@@ -59,11 +59,11 @@
 	}
 	.panel-image :global(img) { display: block; width: 100%; height: auto; }
 	.panel-image :global(picture) { display: block; }
-	.hero { padding: 2rem; background: #f4f4f4; border-radius: 0.75rem; }
+	.hero { padding: 2rem; background: var(--gray); border-radius: var(--radius); }
 	.hero :global(picture) { display: block; margin: 1.5rem 0; }
 	.hero :global(img) { display: block; width: 100%; height: auto; }
-	.button { display: inline-block; padding: 0.75rem 1.25rem; border-radius: 0.4rem; background: #222; color: white; text-decoration: none; }
-	.button:hover { background: #444; }
+	.button { display: inline-block; padding: 0.75rem 1.25rem; border-radius: 0.4rem; background: var(--accent); color: white; text-decoration: none; }
+	.button:hover { filter: brightness(0.85); }
 	h2 { font-size: 2rem; }
 	.intro { margin-bottom: 1.5rem; }
 	.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 1.5rem; }
