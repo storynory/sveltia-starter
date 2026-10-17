@@ -1,4 +1,5 @@
-import { getSettings } from '#lib/server/content.ts';
+import { getOne } from '#lib/server/content.ts';
+import { readDoc } from '#lib/content/read.ts';
 import type { LayoutServerLoad } from './$types';
 
 const defaults = {
@@ -9,17 +10,20 @@ const defaults = {
 	text: '#333333'
 };
 
-// Sveltia's colour widget supplies hex colours. Ignore missing or malformed values.
+// Sveltia's colour widget supplies hex colours.
 const colour = (value: unknown, fallback: string) =>
 	typeof value === 'string' && /^#[\da-fA-F]{3}([\da-fA-F]{3})?$/.test(value)
 		? value
 		: fallback;
 
 export const load: LayoutServerLoad = async () => {
-	const settings = await getSettings('settings', 'general');
-	const scheme = settings.activeScheme && typeof settings.activeScheme === 'object'
-		? settings.activeScheme as Record<string, unknown>
-		: {};
+	// Read the configured slug directly, then load that colour scheme.
+	const settings = (await readDoc('settings', 'general')).data;
+	const slug = typeof settings.activeScheme === 'string' && settings.activeScheme
+		? settings.activeScheme : 'default';
+	const scheme = await getOne('colour-schemes', slug);
+	if (!scheme) throw new Error(`Colour scheme "${slug}" was not found in content/colour-schemes`);
+
 	return {
 		colours: {
 			prime: colour(scheme.prime, defaults.prime),
