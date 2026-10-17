@@ -31,9 +31,7 @@ function slugOf(value: unknown): string {
 	if (typeof value === 'string') return value;
 	if (value && typeof value === 'object' && !Array.isArray(value)) {
 		const record = value as Data;
-		return typeof record.slug === 'string' ? record.slug
-			: typeof record.title === 'string' ? record.title
-			: '';
+		return typeof record.slug === 'string' ? record.slug : '';
 	}
 	return '';
 }
@@ -76,7 +74,7 @@ export async function buildBlock(slug: string): Promise<RenderedBlock | null> {
 		for (const entry of selected) {
 			if (!entry || typeof entry !== 'object') continue;
 			const choice = entry as Data;
-			// Sveltia variable-type list stores { type: 'stories', slug: '...' }.
+			// Sveltia variable-type list stores { type: 'posts', slug: '...' } (or podcasts).
 			// Continue accepting older { collection, slug } records as well.
 			const collection = publicCollection(value(choice, 'type') || value(choice, 'collection'));
 			const selectedSlug = value(choice, 'slug');
