@@ -4,9 +4,17 @@
 	let { block }: { block: RenderedBlock } = $props();
 </script>
 
-<section aria-label={block.heading}>
+<section class:hero={block.type === 'hero'} aria-label={block.heading}>
 	{#if block.heading}<h2>{block.heading}</h2>{/if}
 	{#if block.introduction}<p class="intro">{block.introduction}</p>{/if}
+	{#if block.type === 'hero'}
+		{#if block.image}
+			<Picture src={block.image} alt={block.imageAlt} sizes="(min-width: 900px) 900px, 100vw" priority="high" />
+		{/if}
+		{#if block.buttonText && block.buttonUrl}
+			<p><a class="button" href={block.buttonUrl}>{block.buttonText}</a></p>
+		{/if}
+	{/if}
 	{#if block.items.length}
 		<div class="cards">
 			{#each block.items as item (`${item.collection}/${item.slug}`)}
@@ -26,6 +34,11 @@
 
 <style>
 	section { margin: 2.5rem 0; }
+	.hero { padding: 2rem; background: #f4f4f4; border-radius: 0.75rem; }
+	.hero :global(picture) { display: block; margin: 1.5rem 0; }
+	.hero :global(img) { display: block; width: 100%; height: auto; }
+	.button { display: inline-block; padding: 0.75rem 1.25rem; border-radius: 0.4rem; background: #222; color: white; text-decoration: none; }
+	.button:hover { background: #444; }
 	h2 { font-size: 2rem; }
 	.intro { margin-bottom: 1.5rem; }
 	.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 1.5rem; }

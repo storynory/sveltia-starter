@@ -16,5 +16,5 @@ test('homepage is an ordinary Page selected in Site Settings', async () => {
 	assert.equal(values.homePage, 'home');
 	const page = matter(await fs.readFile('content/pages/home.md', 'utf8'));
 	assert.equal(page.data.title, 'Home');
-	assert.deepEqual(page.data.blocks, ['latest-stories']);
+	assert.deepEqual(page.data.blocks, ['welcome-hero', 'latest-stories']);
 });
