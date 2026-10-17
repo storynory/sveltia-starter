@@ -8,7 +8,7 @@ test('People replaces Authors and existing author relations still resolve', asyn
 	const collections = await loadConfig();
 	assert.ok(collections.some((entry) => entry.name === 'people'));
 	assert.ok(!collections.some((entry) => entry.name === 'authors'));
-	for (const name of ['posts', 'stories']) {
+	for (const name of ['posts']) {
 		const collection = collections.find((entry) => entry.name === name);
 		const author = collection?.fields?.find((field) => field.name === 'author');
 		assert.equal(author?.collection, 'people');
