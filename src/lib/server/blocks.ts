@@ -25,7 +25,10 @@ const value = (data: Data, key: string): string =>
 function slugOf(value: unknown): string {
 	if (typeof value === 'string') return value;
 	if (value && typeof value === 'object' && !Array.isArray(value)) {
-		return String((value as Data).slug ?? '');
+		const record = value as Data;
+		return typeof record.slug === 'string' ? record.slug
+			: typeof record.title === 'string' ? record.title
+			: '';
 	}
 	return '';
 }
