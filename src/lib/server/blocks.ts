@@ -96,3 +96,11 @@ export async function buildBlock(slug: string): Promise<RenderedBlock | null> {
 	}
 	return { slug, heading: value(settings, 'heading') || value(settings, 'title'), introduction: value(settings, 'introduction'), items: records };
 }
+
+/** Resolve an ordered list of block relations from a Page or other record. */
+export async function buildBlocks(references: unknown): Promise<RenderedBlock[]> {
+	if (!Array.isArray(references)) return [];
+	const slugs = references.map(slugOf).filter(Boolean);
+	const results = await Promise.all(slugs.map(buildBlock));
+	return results.filter((block): block is RenderedBlock => block !== null);
+}
