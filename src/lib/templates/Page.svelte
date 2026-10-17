@@ -19,8 +19,8 @@
 
 <style>
 	main.wide { max-width: var(--wide-width); }
-	.excerpt { font-size: 1.15rem; }
-	main { max-width: var(--content-width); margin: 4rem auto; padding: 0 1.5rem; line-height: 1.7; }
+	.excerpt { font-size: 1.15em; }
+	main { max-width: var(--content-width); margin: 3em auto; padding: 0 var(--space); line-height: 1.7; }
 	.content :global(picture) { display: block; max-width: 100%; }
 	.content :global(img) { display: block; max-width: 100%; height: auto; }
 </style>
