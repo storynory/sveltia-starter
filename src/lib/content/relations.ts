@@ -1,6 +1,6 @@
 import { collections, type CollectionName } from '#lib/generated/collections.ts';
 import { readOne, type ReadResult } from '#lib/content/read.ts';
-type RelatedRecord = ReadResult['data'] | null;
+type RelatedRecord = (ReadResult['data'] & { slug: string }) | null;
 
 type RelationDefinition = {
 	collection: string;
@@ -35,7 +35,7 @@ export async function resolveRelations(
 			if (typeof slug !== 'string' || !slug) return null;
 
 			const record = await readOne(target, slug);
-			return record?.data ?? null;
+			return record ? { ...record.data, slug } : null;
 		};
 
 		if (relation.multiple) {
