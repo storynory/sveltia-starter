@@ -6,6 +6,7 @@ siteLogo: ''
 favicon: ''
 defaultImage: ''
 language: en-GB
+homePage: home
 activeScheme: default
 social: null
 footer: null
