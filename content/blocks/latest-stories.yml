@@ -1,0 +1,7 @@
+title: Latest Stories
+type: latest
+heading: Latest Stories
+introduction: Discover our newest stories.
+collection: stories
+limit: 4
+tagMatch: any

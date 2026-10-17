@@ -1,0 +1,22 @@
+collections:
+  - name: homepage
+    label: Homepage
+    icon: home
+    files:
+      - name: home
+        label: Homepage Blocks
+        file: content/homepage/home.yml
+        format: yaml
+        fields:
+          - name: title
+            label: Page Title
+            widget: string
+          - name: blocks
+            label: Blocks (drag to reorder)
+            widget: relation
+            collection: blocks
+            value_field: "{{slug}}"
+            search_fields: [title]
+            display_fields: [title]
+            multiple: true
+            required: false
