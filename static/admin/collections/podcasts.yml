@@ -29,10 +29,11 @@ collections:
         widget: richtext
         required: false
 
-      - name: excerpt
-        label: Episode Summary
+      - name: description
+        label: Description
         widget: text
         required: false
+        hint: Episode description for listings, the episode page, and future podcast RSS feeds.
 
       - name: date
         label: Publication Date
@@ -115,12 +116,12 @@ collections:
         required: false
 
       - name: featuredImage
-        label: Episode Artwork
+        label: Cover Art
         widget: image
         required: false
 
       - name: featuredImageAlt
-        label: Artwork Alt Text
+        label: Cover Art Alt Text
         widget: string
         required: false
 
