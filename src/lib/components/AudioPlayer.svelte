@@ -65,8 +65,7 @@
 		<button type="button" onclick={() => jump(10)} aria-label="Go forward 10 seconds" title="Forward 10 seconds">10 ↷</button>
 	</div>
 
-	<label class="sr-only" for="audio-seek">Playback position</label>
-	<input id="audio-seek" type="range" min="0" max="100" step="0.1" value={progress} oninput={seek} disabled={!duration} />
+	<input aria-label="Playback position" type="range" min="0" max="100" step="0.1" value={progress} oninput={seek} disabled={!duration} />
 	<div class="time"><span>{formatTime(current)}</span><span>{formatTime(duration)}</span></div>
 	{#if status}<p role="status">{status}</p>{/if}
 	<a class="download" href={src} download>Download audio</a>
@@ -89,5 +88,4 @@
 	.time { display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; }
 	.download { display: inline-block; margin-top: .65rem; color: var(--accent); }
 	p { margin: .5rem 0; }
-	.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 </style>
