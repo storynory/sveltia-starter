@@ -24,6 +24,11 @@ collections:
         widget: string
         required: true
 
+      - name: draft
+        label: Draft
+        widget: boolean
+        default: true
+
       - name: body
         label: Show Notes
         widget: richtext
@@ -39,11 +44,6 @@ collections:
         label: Publication Date
         widget: datetime
         required: true
-
-      - name: draft
-        label: Draft
-        widget: boolean
-        default: true
 
       - name: episodeNumber
         label: Episode Number

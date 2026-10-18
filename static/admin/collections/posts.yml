@@ -32,6 +32,11 @@ collections:
         widget: string
         required: true
 
+      - name: draft
+        label: Draft
+        widget: boolean
+        default: true
+
       - name: body
         label: Content
         widget: richtext
@@ -58,11 +63,6 @@ collections:
         search_fields: [name]
         display_fields: [name]
         required: false
-
-      - name: draft
-        label: Draft
-        widget: boolean
-        default: true
 
       # TAXONOMY
 
