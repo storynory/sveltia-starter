@@ -8,3 +8,7 @@ items:
     url: /pages/about/
     newTab: false
     children: []
+  - label: Search
+    url: /search/
+    newTab: false
+    children: []
