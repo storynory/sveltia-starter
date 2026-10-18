@@ -1,13 +1,12 @@
 ---
-title: About Us
-excerpt: ''
+title: About
+excerpt: We do a lot around here.
 layout: standard
 blocks:
   - china
+  - about-panel
 description: Welcome to our new website.
 ---
-
-# About Us
 
 Welcome to our new website, built with SvelteKit and Sveltia CMS.
 

@@ -1,5 +1,5 @@
 ---
-title: Journey to the WEst
+title: Journey to the West
 description: |2-
     The Dragon who Ate a Horse
 
@@ -85,8 +85,8 @@ author: bertie
 narrator: jana
 presenter: ''
 producer: ''
-featuredImage: ''
-featuredImageAlt: ''
+featuredImage: /uploads/monkey-robber-1180x675.jpg.webp
+featuredImageAlt: Monkey fights bandit
 category: chinese-stories
 tags: []
 showOnHome: true

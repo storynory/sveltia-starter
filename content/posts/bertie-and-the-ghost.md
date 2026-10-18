@@ -4,7 +4,7 @@ excerpt: A ghostly story
 date: 2026-10-16T10:40:00
 author: bertie
 draft: false
-category: bertie-stories
+category: ''
 tags: []
 showOnHome: true
 featured: false

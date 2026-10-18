@@ -48,23 +48,6 @@ export const collections = {
     "format": "yaml",
     "relations": {}
   },
-  "homepage": {
-    "kind": "files",
-    "files": [
-      {
-        "name": "home",
-        "file": "content/homepage/home.yml",
-        "format": "yaml",
-        "relations": {
-          "blocks": {
-            "collection": "blocks",
-            "multiple": true,
-            "valueField": "{{slug}}"
-          }
-        }
-      }
-    ]
-  },
   "navigation": {
     "kind": "folder",
     "publicRoute": false,
@@ -176,6 +159,11 @@ export const collections = {
         "file": "content/settings/general.yml",
         "format": "yaml",
         "relations": {
+          "homePage": {
+            "collection": "pages",
+            "multiple": false,
+            "valueField": "{{slug}}"
+          },
           "activeScheme": {
             "collection": "colour-schemes",
             "multiple": false,
@@ -184,32 +172,6 @@ export const collections = {
         }
       }
     ]
-  },
-  "stories": {
-    "kind": "folder",
-    "publicRoute": true,
-    "template": "post",
-    "listTemplate": "default",
-    "folder": "content/stories",
-    "extension": "md",
-    "format": "markdown",
-    "relations": {
-      "author": {
-        "collection": "people",
-        "multiple": false,
-        "valueField": "{{slug}}"
-      },
-      "category": {
-        "collection": "categories",
-        "multiple": false,
-        "valueField": "{{slug}}"
-      },
-      "tags": {
-        "collection": "tags",
-        "multiple": true,
-        "valueField": "{{slug}}"
-      }
-    }
   },
   "tags": {
     "kind": "folder",

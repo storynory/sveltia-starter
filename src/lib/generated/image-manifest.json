@@ -1,4 +1,15 @@
 {
+  "/uploads/icarus-1946.webp": {
+    "width": 618,
+    "height": 900,
+    "sizes": [
+      320
+    ],
+    "formats": [
+      "webp"
+    ],
+    "fallback": "/optimized/icarus-1946.618.jpg"
+  },
   "/uploads/mattise.jpg": {
     "width": 1920,
     "height": 1080,

@@ -2,10 +2,15 @@
 
 export type BlocksContent = {
 	"title": string;
-	"type": "selected" | "latest" | "featured";
+	"type": "selected" | "latest" | "featured" | "hero" | "panel";
 	"heading"?: string;
 	"introduction"?: string;
-	"collection"?: "posts" | "stories" | "podcasts";
+	"image"?: string;
+	"imageAlt"?: string;
+	"imagePosition"?: "left" | "right";
+	"buttonText"?: string;
+	"buttonUrl"?: string;
+	"collection"?: "posts" | "podcasts";
 	"category"?: string;
 	"tags"?: string[];
 	"tagMatch"?: "any" | "all";
@@ -31,11 +36,6 @@ export type ColourSchemesContent = {
 	"second": string;
 	"gray": string;
 	"text": string;
-};
-
-export type HomepageHomeContent = {
-	"title": string;
-	"blocks"?: string[];
 };
 
 export type NavigationContent = {
@@ -123,6 +123,7 @@ export type SettingsGeneralContent = {
 	"favicon"?: string;
 	"defaultImage"?: string;
 	"language": string;
+	"homePage": string;
 	"activeScheme"?: string;
 	"social"?: {
 		"facebook"?: string;
@@ -133,24 +134,6 @@ export type SettingsGeneralContent = {
 	};
 	"footer"?: {
 		"copyright"?: string;
-		"description"?: string;
-	};
-};
-
-export type StoriesContent = {
-	"title": string;
-	"body": string;
-	"excerpt"?: string;
-	"date": string;
-	"author"?: string;
-	"draft": boolean;
-	"category"?: string;
-	"tags"?: string[];
-	"showOnHome"?: boolean;
-	"featured"?: boolean;
-	"featuredImage"?: string;
-	"featuredImageAlt"?: string;
-	"seo"?: {
 		"description"?: string;
 	};
 };
@@ -169,9 +152,6 @@ export type ContentByCollection = {
 	"blocks": BlocksContent;
 	"categories": CategoriesContent;
 	"colour-schemes": ColourSchemesContent;
-	"homepage": {
-		"home": HomepageHomeContent;
-	};
 	"navigation": NavigationContent;
 	"pages": PagesContent;
 	"people": PeopleContent;
@@ -180,6 +160,5 @@ export type ContentByCollection = {
 	"settings": {
 		"general": SettingsGeneralContent;
 	};
-	"stories": StoriesContent;
 	"tags": TagsContent;
 };
