@@ -34,12 +34,15 @@
 	function jump(seconds: number) {
 		if (!Number.isFinite(audio.duration)) return;
 		audio.currentTime = Math.max(0, Math.min(audio.duration, audio.currentTime + seconds));
+		current = audio.currentTime;
 	}
 
 	function seek(event: Event) {
 		if (!Number.isFinite(audio.duration)) return;
 		const value = Number((event.currentTarget as HTMLInputElement).value);
-		audio.currentTime = (value / 100) * audio.duration;
+		const targetTime = (value / 100) * audio.duration;
+		current = targetTime; // Update the visible clock immediately while dragging.
+		audio.currentTime = targetTime;
 	}
 </script>
 
@@ -75,17 +78,17 @@
 	.audio-player {
 		background: var(--second);
 		color: var(--text);
-		padding: var(--space);
+		padding: .75rem 1rem;
 		border: 1px solid var(--prime);
 		border-radius: var(--radius);
 	}
-	.buttons { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+	.buttons { display: flex; align-items: center; justify-content: center; gap: .5rem; }
 	button { font: inherit; cursor: pointer; border: 0; border-radius: var(--radius); padding: .5rem; background: transparent; color: inherit; }
 	button:hover { background: var(--gray); }
 	button:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-	.play { font-size: 1.7rem; min-width: 3.5rem; min-height: 3.5rem; color: var(--accent); }
-	input[type="range"] { display: block; width: 100%; accent-color: var(--accent); margin: .7rem 0 .2rem; }
+	.play { font-size: 2.5rem; min-width: 4rem; min-height: 4rem; color: var(--accent); }
+	input[type="range"] { display: block; width: 100%; accent-color: var(--accent); margin: .3rem 0 .1rem; }
 	.time { display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; }
-	.download { display: inline-block; margin-top: .65rem; color: var(--accent); }
+	.download { display: inline-block; margin-top: .35rem; color: var(--accent); }
 	p { margin: .5rem 0; }
 </style>
