@@ -11,6 +11,9 @@
 	--radius: 0.75rem;
 }
 
+/* Keep the page width steady when search results introduce a scrollbar. */
+html { scrollbar-gutter: stable; }
+
 * { box-sizing: border-box; }
 
 body {
