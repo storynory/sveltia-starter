@@ -2,6 +2,7 @@
 	import type { DetailTemplateData } from './types.ts';
 	import { relationLabel, textField } from './fields.ts';
 	import Picture from '#lib/components/Picture.svelte';
+	import AudioPlayer from '#lib/components/AudioPlayer.svelte';
 
 	let { data }: { data: DetailTemplateData } = $props();
 	const item = $derived(data.item);
@@ -37,10 +38,7 @@
 
 	{#if audio}
 		<div class="player">
-			<audio controls preload="none" src={audio} aria-label={`Listen to ${data.title}`}>
-				<a href={audio}>Download the episode</a>
-			</audio>
-			<p><a href={audio}>Download audio</a></p>
+			<AudioPlayer src={audio} title={data.title} />
 		</div>
 	{/if}
 
@@ -62,8 +60,6 @@
 	h1 { font-size: calc(var(--font-size) * var(--font-scale) * var(--font-scale) * var(--font-scale)); line-height: 1.2; }
 	.meta { display: flex; gap: 1rem; flex-wrap: wrap; color: var(--text); margin-bottom: 1.5rem; }
 	.player { margin: 1.5rem 0; }
-	audio { display: block; width: 100%; }
-	.player p { margin: .5rem 0 0; }
 	.description { white-space: pre-line; }
 	.credits { margin: 1.5rem 0; }
 	.credits p { margin: .2rem 0; }
