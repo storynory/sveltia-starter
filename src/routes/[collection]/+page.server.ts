@@ -11,8 +11,8 @@ export const load: PageServerLoad = async ({ params }) => {
 	const collection = publicCollection(params.collection);
 	if (!collection) error(404, 'Collection not found');
 
-	const records = await getAll(collection);
 	const home = collection === 'pages' ? await homePageSlug() : null;
-	const items = records.filter((record) => published(record as unknown as Record<string, unknown>) && !(home && record.slug === home));
+	const items = await getAll(collection, (records) => records.filter((record) =>
+		published(record.data) && !(home && record.meta.slug === home)));
 	return { collection, listTemplate: collections[collection].listTemplate, items: items as Record<string, unknown>[] };
 };

@@ -89,13 +89,12 @@ export async function buildBlock(slug: string): Promise<RenderedBlock | null> {
 	} else if (type === 'latest' || type === 'featured') {
 		const collection = publicCollection(value(settings, 'collection'));
 		if (collection) {
-			const all = await getAll(collection);
-			records = all
-				.filter((item) => matches(item as unknown as Data, settings))
-				.filter((item) => type !== 'featured' || (item as unknown as Data).featured === true)
-				.map((item) => toItem(item as unknown as Data, collection))
-				.sort((a, b) => b.date.localeCompare(a.date))
-				.slice(0, limit);
+			const all = await getAll(collection, (items) => items
+				.filter((item) => matches(item.data, settings))
+				.filter((item) => type !== 'featured' || item.data.featured === true)
+				.sort((a, b) => value(b.data, 'date').localeCompare(value(a.data, 'date')))
+				.slice(0, limit));
+			records = all.map((item) => toItem(item as unknown as Data, collection));
 		}
 	}
 	return {

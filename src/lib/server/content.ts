@@ -57,11 +57,15 @@ export async function getOne<K extends FolderCollectionName>(
 	return prepare(collection, record);
 }
 
+// Selection sees stored relation slugs, including references whose targets are missing.
+// Only selected records are prepared; missing targets then resolve to null as usual.
 export async function getAll<K extends FolderCollectionName>(
-	collection: K
+	collection: K,
+	select?: (records: ReadResult[]) => ReadResult[]
 ): Promise<ContentItem<K>[]> {
 	const records = await readAll(collection);
-	return Promise.all(records.map((record) => prepare(collection, record)));
+	const selected = select ? select(records) : records;
+	return Promise.all(selected.map((record) => prepare(collection, record)));
 }
 
 // Files collections have a different structure; keep this getter untyped for now.
