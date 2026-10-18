@@ -11,6 +11,7 @@ process.chdir(root);
 const { getAll } = await import('./content.ts');
 const { buildBlock } = await import('./blocks.ts');
 const { load } = await import('../../routes/[collection]/+page.server.ts');
+const { load: loadLayout } = await import('../../routes/+layout.server.ts');
 process.chdir(originalCwd);
 after(() => fs.rm(root, { recursive: true, force: true }));
 
@@ -35,7 +36,13 @@ await write('podcasts', 'episode', { title: 'Episode', narrator: 'reader' }, 'Ep
 await write('pages', 'home', { title: 'Home' });
 await write('pages', 'about', { title: 'About' });
 await write('pages', 'draft', { title: 'Draft', draft: true });
-await write('settings', 'general', { homePage: 'home' });
+await write('settings', 'general', { homePage: 'home', siteName: 'Test Site', siteLogo: '/logo.svg' });
+await write('colour-schemes', 'default', { title: 'Default', prime: '#123456' });
+await write('navigation', 'main-menu', { title: 'Main', items: [
+	{ label: 'About', url: '/pages/about/', newTab: false, children: [
+		{ label: 'External', url: 'https://example.com', newTab: true }
+	] }
+] });
 for (const [slug, settings] of Object.entries({
 	latest: { type: 'latest', limit: 2, tags: ['one', 'two'], tagMatch: 'any' },
 	all: { type: 'latest', tags: ['one', 'two'], tagMatch: 'all' },
@@ -92,4 +99,15 @@ test('listings exclude drafts and the homepage while retaining resolved narrator
 	assert.deepEqual(pages.items.map((item) => item.slug), ['about']);
 	const episodes = await load({ params: { collection: 'podcasts' } } as Parameters<typeof load>[0]) as { items: Record<string, unknown>[] };
 	assert.deepEqual(episodes.items[0].narrator, { name: 'Reader', slug: 'reader' });
+});
+
+test('root layout exposes branding and nested navigation alongside the selected colours', async () => {
+	const data = await loadLayout({} as Parameters<typeof loadLayout>[0]);
+	assert.equal(data?.siteName, 'Test Site');
+	assert.equal(data?.siteLogo, '/logo.svg');
+	assert.equal(data?.colours.prime, '#123456');
+	assert.equal(data?.navigation[0].url, '/pages/about/');
+	assert.deepEqual(data?.navigation[0].children, [
+		{ label: 'External', url: 'https://example.com', newTab: true }
+	]);
 });

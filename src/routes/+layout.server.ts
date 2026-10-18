@@ -25,6 +25,9 @@ export const load: LayoutServerLoad = async () => {
 	if (!scheme) throw new Error(`Colour scheme "${slug}" was not found in content/colour-schemes`);
 
 	return {
+		siteName: typeof settings.siteName === 'string' ? settings.siteName : '',
+		siteLogo: typeof settings.siteLogo === 'string' ? settings.siteLogo : '',
+		navigation: (await getOne('navigation', 'main-menu'))?.items ?? [],
 		colours: {
 			prime: colour(scheme.prime, defaults.prime),
 			accent: colour(scheme.accent, defaults.accent),

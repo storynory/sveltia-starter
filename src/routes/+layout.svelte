@@ -1,5 +1,6 @@
 <script lang="ts">
 	import favicon from '#lib/assets/favicon.svg';
+	import SiteHeader from '#lib/components/SiteHeader.svelte';
 	import '../styles/base.css';
 	import type { LayoutProps } from './$types';
 
@@ -18,6 +19,7 @@
 	style:--gray={data.colours.gray}
 	style:--text={data.colours.text}
 >
+	<SiteHeader siteName={data.siteName} siteLogo={data.siteLogo} items={data.navigation} />
 	{@render children()}
 </div>
 
