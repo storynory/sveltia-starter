@@ -4,6 +4,7 @@ import { loadConfig, type CmsCollection } from './config';
 import { generateCollections } from './collections';
 import { generateTypes } from './types';
 import { generateAdminIndex } from './admin-index';
+import { writeIfChanged } from './write-if-changed';
 
 async function generateTemplateRegistry(config: CmsCollection[], listing: boolean) {
 	const directory = listing ? 'list-templates' : 'templates';
@@ -58,10 +59,10 @@ async function main() {
 	const listRegistry = await generateTemplateRegistry(config, true);
 
 	await fs.mkdir('src/lib/generated', { recursive: true });
-	await fs.writeFile('src/lib/generated/collections.ts', output);
-	await fs.writeFile('src/lib/generated/types.ts', generateTypes(config));
-	await fs.writeFile('src/lib/generated/templates.ts', registry);
-	await fs.writeFile('src/lib/generated/list-templates.ts', listRegistry);
+	await writeIfChanged('src/lib/generated/collections.ts', output);
+	await writeIfChanged('src/lib/generated/types.ts', generateTypes(config));
+	await writeIfChanged('src/lib/generated/templates.ts', registry);
+	await writeIfChanged('src/lib/generated/list-templates.ts', listRegistry);
 
 	console.log(`Generated ${config.length} CMS collections.`);
 }
