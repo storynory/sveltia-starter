@@ -1,24 +1,66 @@
 <script lang="ts">
-	export type SearchItem = {
+	import { onMount } from 'svelte';
+	import Fuse from 'fuse.js';
+
+	type SearchItem = {
 		title: string;
 		excerpt: string;
 		text: string;
 		url: string;
 		collection: string;
+		categories: string[];
+		tags: string[];
 	};
-
-	let { items }: { items: SearchItem[] } = $props();
+	let { indexUrl = '/api/search-index/' }: { indexUrl?: string } = $props();
 	let query = $state('');
+	let items = $state<SearchItem[]>([]);
+	let loading = $state(true);
+	let loadError = $state('');
 
-	const terms = $derived(query.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean));
-	const results = $derived(
-		terms.length
-			? items.filter((item) => {
-					const haystack = `${item.title} ${item.excerpt} ${item.text}`.toLocaleLowerCase();
-					return terms.every((term) => haystack.includes(term));
-				})
-			: []
-	);
+	const fuse = $derived(new Fuse(items, {
+		includeScore: true,
+		ignoreLocation: true,
+		threshold: 0.3,
+		keys: [
+			{ name: 'title', weight: 5 },
+			{ name: 'categories', weight: 4 },
+			{ name: 'tags', weight: 3 },
+			{ name: 'excerpt', weight: 2 },
+			{ name: 'text', weight: 1 }
+		]
+	}));
+	const terms = $derived(query.trim().split(/\s+/).filter(Boolean));
+	// Searching each word separately allows "Chinese dragon" to match a category
+	// and a tag, even when the words don't occur in the same field.
+	const results = $derived.by(() => {
+		if (!terms.length) return [];
+		const scores = new Map<string, { item: SearchItem; score: number; matches: number }>();
+		for (const term of terms) {
+			for (const match of fuse.search(term)) {
+				const key = match.item.url;
+				const existing = scores.get(key) ?? { item: match.item, score: 0, matches: 0 };
+				existing.score += match.score ?? 1;
+				existing.matches++;
+				scores.set(key, existing);
+			}
+		}
+		return [...scores.values()]
+			.filter((entry) => entry.matches === terms.length)
+			.sort((a, b) => a.score - b.score)
+			.map((entry) => entry.item);
+	});
+
+	onMount(async () => {
+		try {
+			const response = await fetch(indexUrl);
+			if (!response.ok) throw new Error('Search index unavailable');
+			items = await response.json();
+		} catch {
+			loadError = 'Search is unavailable at the moment.';
+		} finally {
+			loading = false;
+		}
+	});
 </script>
 
 <form role="search" onsubmit={(event) => event.preventDefault()}>
@@ -26,14 +68,18 @@
 	<input id="site-search" type="search" bind:value={query} placeholder="Search stories and pages…" autocomplete="off" />
 </form>
 
-{#if terms.length}
+{#if loading}
+	<p>Loading search…</p>
+{:else if loadError}
+	<p role="alert">{loadError}</p>
+{:else if terms.length}
 	<p aria-live="polite">{results.length} {results.length === 1 ? 'result' : 'results'} found</p>
 	<ul>
 		{#each results as item (item.url)}
 			<li>
 				<h2><a href={item.url}>{item.title}</a></h2>
 				{#if item.excerpt}<p>{item.excerpt}</p>{/if}
-				<small>{item.collection}</small>
+				<small>{item.collection}{item.categories.length ? ` · ${item.categories.join(', ')}` : ''}</small>
 			</li>
 		{/each}
 	</ul>
