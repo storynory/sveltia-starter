@@ -13,7 +13,7 @@ export const standardFeed = async (collection: FolderCollectionName, origin: str
 	const description = String(settings.description ?? settings.tagline ?? '');
 	const language = String(settings.language ?? 'en-GB');
 	const items = await Promise.all(records.slice(0, limit).map(async ({ meta, data, body }) => {
-		const link = absoluteUrl(`/posts/${encodeURIComponent(meta.slug!)}/`, base);
+		const link = absoluteUrl(`/${collection}/${encodeURIComponent(meta.slug!)}/`, base);
 		const description = typeof data.excerpt === 'string' && data.excerpt.trim()
 			? data.excerpt : typeof data.description === 'string' ? data.description : '';
 		const contents = itemBase(data.title, link, data.date, description);
@@ -60,7 +60,7 @@ export const podcastFeed = async (collection: FolderCollectionName, origin: stri
 		})
 		.slice(0, limit)
 		.map(({ meta, data }) => {
-			const link = absoluteUrl(`/podcasts/${encodeURIComponent(meta.slug!)}/`, base);
+			const link = absoluteUrl(`/${collection}/${encodeURIComponent(meta.slug!)}/`, base);
 			const description = typeof data.description === 'string' ? data.description : '';
 			const contents = itemBase(data.title, link, data.date, description);
 			contents.push(`<enclosure url="${xml(data.audio)}" length="${data.length}" type="audio/mpeg"/>`);
