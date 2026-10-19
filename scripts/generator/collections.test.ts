@@ -21,3 +21,15 @@ test('generates independently configurable listing and detail templates', () => 
 	assert.match(output, /"podcasts": \{[\s\S]*?"template": "podcast",[\s\S]*?"listTemplate": "episodes"/);
 	assert.match(output, /"posts": \{[\s\S]*?"listTemplate": "default"/);
 });
+
+test('generates RSS settings for opted-in and disabled collections', () => {
+	const output = generateCollections([
+		{ name: 'posts', folder: 'content/posts', public_route: true, rss: 'standard' },
+		{ name: 'podcasts', folder: 'content/podcasts', public_route: true, rss: 'podcast' },
+		{ name: 'pages', folder: 'content/pages', public_route: true, rss: false },
+		{ name: 'other', folder: 'content/other' }
+	]);
+	assert.match(output, /"rss": "standard"/);
+	assert.match(output, /"rss": "podcast"/);
+	assert.equal((output.match(/"rss": false/g) ?? []).length, 2);
+});
