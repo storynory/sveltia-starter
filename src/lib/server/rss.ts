@@ -1,3 +1,4 @@
+import type { FolderCollectionName } from '#lib/server/content.ts';
 import { readAll, readDoc } from '#lib/content/read.ts';
 import { published } from '#lib/server/public-routes.ts';
 
@@ -16,7 +17,7 @@ export function publicationDate(value: unknown): string | null {
 	return Number.isNaN(date.getTime()) ? null : date.toUTCString();
 }
 
-export async function feedData(collection: 'posts' | 'podcasts', requestOrigin: string) {
+export async function feedData(collection: FolderCollectionName, requestOrigin: string) {
 	const settings = (await readDoc('settings', 'general')).data;
 	const siteUrl = typeof settings.siteUrl === 'string' ? settings.siteUrl.trim() : '';
 	const base = new URL(siteUrl || requestOrigin);

@@ -3,6 +3,7 @@ collections:
     label: Podcasts
     label_singular: Episode
     public_route: true
+    rss: podcast
     template: podcast
     list_template: episodes
     folder: content/podcasts

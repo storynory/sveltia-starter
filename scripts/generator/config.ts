@@ -16,6 +16,7 @@ export type CmsField = {
 
 export type CmsCollection = {
 	public_route?: boolean;
+	rss?: false | 'standard' | 'podcast';
 	template?: string;
 	list_template?: string;
 	fields?: CmsField[];

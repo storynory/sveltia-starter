@@ -59,6 +59,7 @@ export function generateCollections(input: CmsCollection[]) {
 			collections[item.name] = {
 				kind: 'folder',
 				publicRoute: item.public_route === true,
+				rss: item.rss ?? false,
 				template: item.template ?? 'default',
 				listTemplate: item.list_template ?? 'default',
 				folder: item.folder,
