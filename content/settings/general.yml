@@ -1,10 +1,10 @@
 siteName: Sveltia Starter
-tagline: ''
-siteUrl: ''
-description: ''
-siteLogo: ''
+tagline: A place to start
+siteUrl: https://relaxivity.app
+description: A starter for Sveltia and Sveltkit with hints of WP
+siteLogo: /uploads/relaxivity3.jpg
 favicon: ''
-defaultImage: ''
+defaultImage: /uploads/relaxivity3.jpg
 language: en-GB
 homePage: home
 activeScheme: warm-ivory-forest-green
@@ -24,7 +24,7 @@ podcastFeed:
   author: ''
   image: ''
   category: ''
-  ownerName: ''
-  ownerEmail: ''
-  type: episodic
   explicit: false
+  ownerEmail: ''
+  ownerName: ''
+  type: episodic
