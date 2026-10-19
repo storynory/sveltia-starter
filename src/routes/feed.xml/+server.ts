@@ -1,3 +1,4 @@
+import { collections } from '#lib/generated/collections.ts';
 import { renderMarkdown } from '#lib/content/render.ts';
 import { absoluteUrl, channelHeader, feedData, feedResponse, itemBase, xml } from '#lib/server/rss.ts';
 import type { RequestHandler } from './$types';
@@ -5,6 +6,7 @@ import type { RequestHandler } from './$types';
 export const prerender = true;
 
 export const GET: RequestHandler = async ({ url }) => {
+	if (collections.posts.rss !== 'standard') return new Response('Feed disabled', { status: 404 });
 	const { settings, base, records } = await feedData('posts', url.origin);
 	const options = settings.rss as { enabled?: boolean; limit?: number; content?: string } | null;
 	if (options?.enabled === false) return new Response('RSS disabled', { status: 404 });
