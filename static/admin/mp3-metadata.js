@@ -50,19 +50,32 @@ CMS.registerEventListener({
     if (typeof url !== 'string' || !/^https?:\/\//i.test(url)) return;
 
     let updated = data;
+    let seconds = null;
     try {
-      const seconds = await audioDuration(url);
+      seconds = await audioDuration(url);
       updated = updated.set('duration', formatDuration(seconds));
     } catch (error) {
       console.warn('Could not detect audio duration; keeping existing value.', error);
     }
 
-    // Never substitute a bitrate-based estimate for the exact RSS file size.
-    try {
-      const size = await audioLength(url);
+    // Preserve an existing byte count (including manually corrected values).
+    // When empty, prefer the exact Content-Length, otherwise estimate at the
+    // episode bitrate (128 kbps by default). VBR estimates can be inaccurate.
+    const existing = Number(data.get('length'));
+    if (!Number.isSafeInteger(existing) || existing <= 0) {
+      let size = null;
+      try {
+        size = await audioLength(url);
+      } catch {
+        // Typical for Libsyn: the audio plays but cross-origin HEAD is blocked.
+      }
+      if (size === null && seconds !== null) {
+        const configured = Number(data.get('bitrate'));
+        const bitrate = Number.isFinite(configured) && configured > 0 ? configured : 128;
+        size = Math.round(seconds * bitrate * 1000 / 8);
+        console.info('Estimated MP3 byte length using', bitrate, 'kbps:', size);
+      }
       if (size !== null) updated = updated.set('length', size);
-    } catch {
-      console.info('Host does not expose MP3 file size to the browser; keeping existing value.');
     }
     return updated;
   }
