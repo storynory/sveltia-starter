@@ -1,14 +1,15 @@
 ---
 title: The Green Willow
 draft: false
+excerpt: A mellow and sad story of a Samurai warrior who falls in love.
 description: A mellow and sad story of a Samurai warrior who falls in love.
 date: 2026-10-18T14:51:00
 episodeNumber: null
 seasonNumber: null
-audio: https://traffic.libsyn.com/blogrelations/journey-to-the-west-crown-that-hurt-16.mp3
+audio: https://traffic.libsyn.com/relaxivity/green-willow-mix-relaxivity.mp3
 bitrate: 128
 length: 13441625
-duration: '00:14:00'
+duration: '00:12:52'
 author: bertie
 narrator: jana
 presenter: ''
