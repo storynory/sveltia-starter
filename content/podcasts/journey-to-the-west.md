@@ -78,10 +78,9 @@ description: |2-
 date: 2026-10-17T08:23:00
 episodeNumber: 3
 seasonNumber: 4
-audio: https://libsyn.com/journey-to-the-west.mp3
-bitrate: 128
+audio: https://traffic.libsyn.com/blogrelations/journey-to-the-west-crown-that-hurt-16.mp3
 length: null
-duration: ''
+duration: 00.12.35
 author: bertie
 narrator: jana
 presenter: ''
