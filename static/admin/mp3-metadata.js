@@ -1,16 +1,20 @@
 // Sveltia preSave hook: detect MP3 metadata from the episode's audio URL.
 // Works with remote media; manual values are preserved on failure.
-function audioDuration(url) {
+function audioDurationOnce(url, timeoutMs = 25000) {
   return new Promise((resolve, reject) => {
     const audio = new Audio();
     audio.preload = 'metadata';
-    const timeout = setTimeout(() => finish(null), 12000);
+    let settled = false;
+
+    const timeout = setTimeout(() => finish(null), timeoutMs);
 
     function finish(seconds) {
+      if (settled) return;
+      settled = true;
       clearTimeout(timeout);
       audio.removeAttribute('src');
       audio.load();
-      if (seconds === null) reject(new Error('Audio metadata unavailable'));
+      if (seconds === null) reject(new Error('Audio metadata unavailable or timed out'));
       else resolve(seconds);
     }
 
@@ -21,6 +25,15 @@ function audioDuration(url) {
     audio.addEventListener('error', () => finish(null), { once: true });
     audio.src = url;
   });
+}
+
+// A second attempt helps when remote hosts need time to prepare an MP3.
+async function audioDuration(url) {
+  try {
+    return await audioDurationOnce(url);
+  } catch {
+    return audioDurationOnce(url);
+  }
 }
 
 function formatDuration(seconds) {
