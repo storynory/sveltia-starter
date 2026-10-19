@@ -3,6 +3,9 @@ import { homePageSlug } from '#lib/server/home.ts';
 import { publicCollections, publicEntries, published } from '#lib/server/public-routes.ts';
 import type { RequestHandler } from './$types';
 
+// Generate this endpoint as a static XML file during the build.
+export const prerender = true;
+
 const escapeXml = (value: string): string =>
 	value.replace(/[&<>"']/g, (char) => ({
 		'&': '&amp;',
