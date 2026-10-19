@@ -1,13 +1,14 @@
 ---
 title: Lanval
+draft: false
 description: An ancient Story from the court of King Arthur
 date: 2026-10-18T14:59:00
-draft: false
 episodeNumber: null
 seasonNumber: null
-audio: ''
-length: null
-duration: ''
+audio: https://traffic.libsyn.com/relaxivity/lanval-relaxivity.mp3
+bitrate: 128
+length: 30926829
+duration: '00:31:37'
 author: bertie
 narrator: jana
 presenter: ''
