@@ -14,7 +14,7 @@ export const GET: RequestHandler = ({ params, url }) => {
   const collection = publicCollection(params.collection);
   if (!collection) return new Response('Not found', { status: 404 });
 
-  const type = collections[collection].rss;
+  const type: string = String(collections[collection].rss);
   if (type === 'standard') return standardFeed(collection, url.origin);
   if (type === 'podcast') return podcastFeed(collection, url.origin);
   return new Response('No feed for this collection', { status: 404 });
