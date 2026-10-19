@@ -77,7 +77,7 @@ description: |2-
   For now from me Jana, bye bye!
 date: 2026-10-17T08:23:00
 episodeNumber: 3
-seasonNumber: 4
+seasonNumber: null
 audio: https://traffic.libsyn.com/blogrelations/journey-to-the-west-crown-that-hurt-16.mp3
 length: null
 duration: ''
