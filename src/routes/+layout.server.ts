@@ -1,3 +1,4 @@
+import { collections } from '#lib/generated/collections.ts';
 import { getOne } from '#lib/server/content.ts';
 import { readDoc } from '#lib/content/read.ts';
 import type { LayoutServerLoad } from './$types';
@@ -28,6 +29,10 @@ export const load: LayoutServerLoad = async () => {
 		siteName: typeof settings.siteName === 'string' ? settings.siteName : '',
 		siteLogo: typeof settings.siteLogo === 'string' ? settings.siteLogo : '',
 		navigation: (await getOne('navigation', 'main-menu'))?.items ?? [],
+		feeds: {
+			posts: collections.posts.rss === 'standard' && (settings.rss as { enabled?: boolean } | null)?.enabled !== false,
+			podcasts: collections.podcasts.rss === 'podcast' && (settings.podcastFeed as { enabled?: boolean } | null)?.enabled !== false
+		},
 		colours: {
 			prime: colour(scheme.prime, defaults.prime),
 			accent: colour(scheme.accent, defaults.accent),
