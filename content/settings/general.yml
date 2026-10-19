@@ -10,3 +10,9 @@ homePage: home
 activeScheme: warm-ivory-forest-green
 social: null
 footer: null
+rss:
+  enabled: true
+  limit: 20
+  content: summary
+sitemap:
+  enabled: true
