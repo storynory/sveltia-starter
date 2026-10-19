@@ -1,9 +1,11 @@
+import { collections } from '#lib/generated/collections.ts';
 import { absoluteUrl, channelHeader, feedData, feedResponse, itemBase, xml } from '#lib/server/rss.ts';
 import type { RequestHandler } from './$types';
 
 export const prerender = true;
 
 export const GET: RequestHandler = async ({ url }) => {
+	if (collections.podcasts.rss !== 'podcast') return new Response('Podcast feed disabled', { status: 404 });
 	const { settings, base, records } = await feedData('podcasts', url.origin);
 	const options = settings.podcastFeed as {
 		enabled?: boolean; limit?: number; title?: string; description?: string;
