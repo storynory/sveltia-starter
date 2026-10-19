@@ -16,3 +16,12 @@ rss:
   content: summary
 sitemap:
   enabled: true
+podcastFeed:
+  enabled: true
+  limit: 20
+  title: ''
+  description: ''
+  author: ''
+  image: ''
+  category: ''
+  explicit: false
