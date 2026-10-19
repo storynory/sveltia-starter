@@ -1,53 +1,5 @@
-import { collections } from '#lib/generated/collections.ts';
-import { absoluteUrl, channelHeader, feedData, feedResponse, itemBase, xml } from '#lib/server/rss.ts';
+import { podcastFeed } from '#lib/server/feed-handlers.ts';
 import type { RequestHandler } from './$types';
 
 export const prerender = true;
-
-export const GET: RequestHandler = async ({ url }) => {
-	if (collections.podcasts.rss !== 'podcast') return new Response('Podcast feed disabled', { status: 404 });
-	const { settings, base, records } = await feedData('podcasts', url.origin);
-	const options = settings.podcastFeed as {
-		enabled?: boolean; limit?: number; title?: string; description?: string;
-		author?: string; image?: string; category?: string; explicit?: boolean;
-	} | null;
-	if (options?.enabled === false) return new Response('Podcast feed disabled', { status: 404 });
-	const limit = Number.isInteger(options?.limit) && (options?.limit ?? 0) > 0 ? options!.limit! : 20;
-	const title = options?.title || String(settings.siteName ?? 'Podcast');
-	const description = options?.description || String(settings.description ?? settings.tagline ?? '');
-	const language = String(settings.language ?? 'en-GB');
-	const author = options?.author || title;
-	const channel = channelHeader(title, absoluteUrl('/', base), description, language);
-	channel.push(`<itunes:author>${xml(author)}</itunes:author>`);
-	channel.push(`<itunes:summary>${xml(description)}</itunes:summary>`);
-	channel.push(`<itunes:explicit>${options?.explicit === true ? 'true' : 'false'}</itunes:explicit>`);
-	if (options?.category) channel.push(`<itunes:category text="${xml(options.category)}"/>`);
-	if (options?.image) {
-		const image = absoluteUrl(options.image, base);
-		channel.push(`<itunes:image href="${xml(image)}"/>`);
-		channel.push(`<image><url>${xml(image)}</url><title>${xml(title)}</title><link>${xml(absoluteUrl('/', base))}</link></image>`);
-	}
-	const items = records
-		.filter(({ data }) => {
-			if (typeof data.audio !== 'string' || !/^https:\/\//i.test(data.audio)) return false;
-			return typeof data.length === 'number' && Number.isSafeInteger(data.length) && data.length > 0;
-		})
-		.slice(0, limit)
-		.map(({ meta, data }) => {
-			const link = absoluteUrl(`/podcasts/${encodeURIComponent(meta.slug!)}/`, base);
-			const description = typeof data.description === 'string' ? data.description : '';
-			const contents = itemBase(data.title, link, data.date, description);
-			contents.push(`<enclosure url="${xml(data.audio)}" length="${data.length}" type="audio/mpeg"/>`);
-			if (typeof data.episodeNumber === 'number') contents.push(`<itunes:episode>${data.episodeNumber}</itunes:episode>`);
-			if (typeof data.seasonNumber === 'number') contents.push(`<itunes:season>${data.seasonNumber}</itunes:season>`);
-			if (typeof data.duration === 'string' && /^\d{1,3}:\d{2}(?::\d{2})?$/.test(data.duration))
-				contents.push(`<itunes:duration>${xml(data.duration)}</itunes:duration>`);
-			return `<item>${contents.join('')}</item>`;
-		});
-	const body = `<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
-<channel>${channel.join('')}
-${items.join('\n')}
-</channel></rss>`;
-	return feedResponse(body);
-};
+export const GET: RequestHandler = ({ url }) => podcastFeed('podcasts', url.origin);
