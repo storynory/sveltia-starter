@@ -158,3 +158,52 @@ collections:
                 widget: boolean
                 default: true
 
+
+          - name: podcastFeed
+            label: Podcast Feed
+            widget: object
+            collapsed: true
+            required: false
+            fields:
+              - name: enabled
+                label: Enable podcast RSS feed
+                widget: boolean
+                default: true
+
+              - name: limit
+                label: Number of episodes
+                widget: number
+                value_type: int
+                min: 1
+                default: 20
+
+              - name: title
+                label: Podcast title
+                widget: string
+                required: false
+
+              - name: description
+                label: Podcast description
+                widget: text
+                required: false
+
+              - name: author
+                label: Podcast author or organisation
+                widget: string
+                required: false
+
+              - name: image
+                label: Podcast cover art
+                widget: image
+                required: false
+
+              - name: category
+                label: Podcast category
+                widget: string
+                required: false
+                hint: Use an Apple Podcasts category, such as Fiction or Education.
+
+              - name: explicit
+                label: Explicit content
+                widget: boolean
+                default: false
