@@ -197,11 +197,52 @@ collections:
                 widget: image
                 required: false
 
-              - name: category
-                label: Podcast category
+              - name: ownerName
+                label: Podcast owner name
                 widget: string
                 required: false
-                hint: Use an Apple Podcasts category, such as Fiction or Education.
+                hint: Name of the person or organisation managing this podcast.
+
+              - name: ownerEmail
+                label: Podcast owner email
+                widget: string
+                required: false
+                hint: Published in the RSS feed. Use a dedicated public contact address, not a private email.
+
+              - name: type
+                label: Podcast type
+                widget: select
+                options:
+                  - { label: Episodic, value: episodic }
+                  - { label: Serial, value: serial }
+                default: episodic
+                required: false
+
+              - name: category
+                label: Podcast category
+                widget: select
+                required: false
+                options:
+                  - Arts
+                  - Business
+                  - Comedy
+                  - Education
+                  - Fiction
+                  - Government
+                  - History
+                  - Health & Fitness
+                  - Kids & Family
+                  - Leisure
+                  - Music
+                  - News
+                  - Religion & Spirituality
+                  - Science
+                  - Society & Culture
+                  - Sports
+                  - Technology
+                  - True Crime
+                  - TV & Film
+                hint: Choose an Apple Podcasts top-level category.
 
               - name: explicit
                 label: Explicit content
