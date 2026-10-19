@@ -4,6 +4,7 @@ export const collections = {
   "blocks": {
     "kind": "folder",
     "publicRoute": false,
+    "rss": false,
     "template": "default",
     "listTemplate": "default",
     "folder": "content/blocks",
@@ -25,6 +26,7 @@ export const collections = {
   "categories": {
     "kind": "folder",
     "publicRoute": false,
+    "rss": false,
     "template": "default",
     "listTemplate": "default",
     "folder": "content/categories",
@@ -41,6 +43,7 @@ export const collections = {
   "colour-schemes": {
     "kind": "folder",
     "publicRoute": false,
+    "rss": false,
     "template": "default",
     "listTemplate": "default",
     "folder": "content/colour-schemes",
@@ -51,6 +54,7 @@ export const collections = {
   "navigation": {
     "kind": "folder",
     "publicRoute": false,
+    "rss": false,
     "template": "default",
     "listTemplate": "default",
     "folder": "content/navigation",
@@ -61,6 +65,7 @@ export const collections = {
   "pages": {
     "kind": "folder",
     "publicRoute": true,
+    "rss": false,
     "template": "page",
     "listTemplate": "default",
     "folder": "content/pages",
@@ -77,6 +82,7 @@ export const collections = {
   "people": {
     "kind": "folder",
     "publicRoute": false,
+    "rss": false,
     "template": "default",
     "listTemplate": "default",
     "folder": "content/people",
@@ -87,6 +93,7 @@ export const collections = {
   "podcasts": {
     "kind": "folder",
     "publicRoute": true,
+    "rss": "podcast",
     "template": "podcast",
     "listTemplate": "episodes",
     "folder": "content/podcasts",
@@ -128,6 +135,7 @@ export const collections = {
   "posts": {
     "kind": "folder",
     "publicRoute": true,
+    "rss": "standard",
     "template": "post",
     "listTemplate": "default",
     "folder": "content/posts",
@@ -176,6 +184,7 @@ export const collections = {
   "tags": {
     "kind": "folder",
     "publicRoute": false,
+    "rss": false,
     "template": "default",
     "listTemplate": "default",
     "folder": "content/tags",
