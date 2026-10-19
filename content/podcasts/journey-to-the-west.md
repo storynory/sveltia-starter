@@ -1,5 +1,6 @@
 ---
 title: Journey to the West
+draft: false
 description: |2-
     The Dragon who Ate a Horse
 
@@ -75,11 +76,10 @@ description: |2-
   Drop by soon for more lovely stories and if you are able to help us by supporting Storynory on Patreon or PayPal, wed love to give you a shoutout!
   For now from me Jana, bye bye!
 date: 2026-10-17T08:23:00
-draft: false
 episodeNumber: 3
 seasonNumber: 4
 audio: https://libsyn.com/journey-to-the-west.mp3
-length: 57890
+length: null
 duration: 00.12.35
 author: bertie
 narrator: jana
