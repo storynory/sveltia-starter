@@ -4,7 +4,7 @@ import type { FolderCollectionName } from '#lib/server/content.ts';
 import { absoluteUrl, channelHeader, feedData, feedResponse, itemBase, xml } from '#lib/server/rss.ts';
 
 export const standardFeed = async (collection: FolderCollectionName, origin: string): Promise<Response> => {
-	if (collections[collection].rss !== 'standard') return new Response('Feed disabled', { status: 404 });
+	if (String(collections[collection].rss) !== 'standard') return new Response('Feed disabled', { status: 404 });
 	const { settings, base, records } = await feedData(collection, origin);
 	const options = settings.rss as { enabled?: boolean; limit?: number; content?: string } | null;
 	if (options?.enabled === false) return new Response('RSS disabled', { status: 404 });
@@ -31,7 +31,7 @@ ${items.join('\n')}
 };
 
 export const podcastFeed = async (collection: FolderCollectionName, origin: string): Promise<Response> => {
-	if (collections[collection].rss !== 'podcast') return new Response('Podcast feed disabled', { status: 404 });
+	if (String(collections[collection].rss) !== 'podcast') return new Response('Podcast feed disabled', { status: 404 });
 	const { settings, base, records } = await feedData(collection, origin);
 	const options = settings.podcastFeed as {
 		enabled?: boolean; limit?: number; title?: string; description?: string;
