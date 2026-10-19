@@ -30,15 +30,22 @@ collections:
         default: true
 
       - name: body
-        label: Show Notes
+        label: Full Transcript / Show Notes
         widget: richtext
         required: false
+        hint: Long-form content displayed on the episode page. A full transcript makes the episode searchable.
 
-      - name: description
-        label: Description
+      - name: excerpt
+        label: Excerpt
         widget: text
         required: false
-        hint: Episode description for listings, the episode page, and future podcast RSS feeds.
+        hint: A short introduction for episode listings and previews.
+
+      - name: description
+        label: Podcast Feed Description
+        widget: text
+        required: false
+        hint: Concise episode summary sent to podcast apps and also displayed on the episode page. Do not paste the full transcript here.
 
       - name: date
         label: Publication Date
