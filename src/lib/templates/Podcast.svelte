@@ -52,7 +52,7 @@
 	{/if}
 
 	{#if description}<p class="description">{description}</p>{/if}
-	{#if html}<div class="content">{@html html}</div>{/if}
+	{#if html}<section class="content" aria-label="Transcript and show notes">{@html html}</section>{/if}
 </article>
 
 <style>
