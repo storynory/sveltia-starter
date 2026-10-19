@@ -136,6 +136,27 @@ export type SettingsGeneralContent = {
 		"copyright"?: string;
 		"description"?: string;
 	};
+	"rss"?: {
+		"enabled": boolean;
+		"limit": number;
+		"content": "summary" | "full";
+	};
+	"sitemap"?: {
+		"enabled": boolean;
+	};
+	"podcastFeed"?: {
+		"enabled": boolean;
+		"limit": number;
+		"title"?: string;
+		"description"?: string;
+		"author"?: string;
+		"image"?: string;
+		"ownerName"?: string;
+		"ownerEmail"?: string;
+		"type"?: "episodic" | "serial";
+		"category"?: "Arts" | "Business" | "Comedy" | "Education" | "Fiction" | "Government" | "History" | "Health & Fitness" | "Kids & Family" | "Leisure" | "Music" | "News" | "Religion & Spirituality" | "Science" | "Society & Culture" | "Sports" | "Technology" | "True Crime" | "TV & Film";
+		"explicit": boolean;
+	};
 };
 
 export type TagsContent = {
