@@ -1,13 +1,14 @@
 ---
 title: Birth of Buddha
+draft: false
 description: “Buddha” is an ancient Sanskrit word that means “a person who is awake.” A buddha is awake to the true nature of reality, and free from the fog of daily illusions, such as hate, greed, and folly.
 date: 2026-10-18T14:44:00
-draft: false
 episodeNumber: null
 seasonNumber: null
-audio: https://traffic.libsyn.com/relaxivity/birth-of-buddha-relaxivity.mp3
-length: null
-duration: ''
+audio: https://traffic.libsyn.com/blogrelations/journey-to-the-west-crown-that-hurt-16.mp3
+bitrate: 128
+length: 13441625
+duration: '00:14:00'
 author: bertie
 narrator: jana
 presenter: ''
