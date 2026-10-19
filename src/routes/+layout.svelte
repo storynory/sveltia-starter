@@ -9,6 +9,12 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	{#if data.feeds.posts}
+		<link rel="alternate" type="application/rss+xml" title={`${data.siteName} RSS`} href="/posts/feed.xml" />
+	{/if}
+	{#if data.feeds.podcasts}
+		<link rel="alternate" type="application/rss+xml" title={`${data.siteName} Podcast`} href="/podcasts/feed.xml" />
+	{/if}
 </svelte:head>
 
 <div
