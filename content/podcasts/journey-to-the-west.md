@@ -79,8 +79,9 @@ date: 2026-10-17T08:23:00
 episodeNumber: 3
 seasonNumber: 4
 audio: https://libsyn.com/journey-to-the-west.mp3
+bitrate: 128
 length: null
-duration: 00.12.35
+duration: ''
 author: bertie
 narrator: jana
 presenter: ''
