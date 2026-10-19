@@ -24,4 +24,7 @@ podcastFeed:
   author: ''
   image: ''
   category: ''
+  ownerName: ''
+  ownerEmail: ''
+  type: episodic
   explicit: false

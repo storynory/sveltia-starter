@@ -9,6 +9,9 @@
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	{#each data.feeds as feed (feed.href)}
+		<link rel="alternate" type="application/rss+xml" title={feed.title} href={feed.href} />
+	{/each}
 </svelte:head>
 
 <div
