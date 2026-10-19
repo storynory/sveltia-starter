@@ -4,6 +4,7 @@ collections:
     label: Posts
     label_singular: Post
     public_route: true
+    rss: standard
     template: post
     folder: content/posts
     create: true
