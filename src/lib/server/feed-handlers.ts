@@ -36,6 +36,7 @@ export const podcastFeed = async (collection: FolderCollectionName, origin: stri
 	const options = settings.podcastFeed as {
 		enabled?: boolean; limit?: number; title?: string; description?: string;
 		author?: string; image?: string; category?: string; explicit?: boolean;
+		ownerName?: string; ownerEmail?: string; type?: 'episodic' | 'serial';
 	} | null;
 	if (options?.enabled === false) return new Response('Podcast feed disabled', { status: 404 });
 	const limit = Number.isInteger(options?.limit) && (options?.limit ?? 0) > 0 ? options!.limit! : 20;
@@ -46,6 +47,10 @@ export const podcastFeed = async (collection: FolderCollectionName, origin: stri
 	const channel = channelHeader(title, absoluteUrl('/', base), description, language);
 	channel.push(`<itunes:author>${xml(author)}</itunes:author>`);
 	channel.push(`<itunes:summary>${xml(description)}</itunes:summary>`);
+	channel.push(`<itunes:type>${options?.type === 'serial' ? 'serial' : 'episodic'}</itunes:type>`);
+	if (options?.ownerName?.trim() && options?.ownerEmail?.trim()) {
+		channel.push(`<itunes:owner><itunes:name>${xml(options.ownerName.trim())}</itunes:name><itunes:email>${xml(options.ownerEmail.trim())}</itunes:email></itunes:owner>`);
+	}
 	channel.push(`<itunes:explicit>${options?.explicit === true ? 'true' : 'false'}</itunes:explicit>`);
 	if (options?.category) channel.push(`<itunes:category text="${xml(options.category)}"/>`);
 	if (options?.image) {
