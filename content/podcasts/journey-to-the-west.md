@@ -78,7 +78,7 @@ description: |2-
 date: 2026-10-17T08:23:00
 episodeNumber: 3
 seasonNumber: null
-audio: ''
+audio: https://traffic.libsyn.com/blogrelations/journey-to-the-west-crown-that-hurt-16.mp3
 bitrate: 128
 length: 13441625
 duration: '00:14:00'
