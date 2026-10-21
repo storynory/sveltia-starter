@@ -12,6 +12,24 @@ const defaults = {
 	text: '#333333'
 };
 
+const defaultTypography = {
+	bodyFont: "system-ui, -apple-system, 'Segoe UI', sans-serif",
+	headingFont: "system-ui, -apple-system, 'Segoe UI', sans-serif",
+	fontSize: 17,
+	fontScale: 1.2,
+	lineHeight: 1.6
+};
+
+const fontStack = (value: unknown, fallback: string) =>
+	typeof value === 'string' && value.trim() && /^[\w\s,'".-]+$/.test(value)
+		? value.trim()
+		: fallback;
+
+const boundedNumber = (value: unknown, fallback: number, min: number, max: number) =>
+	typeof value === 'number' && Number.isFinite(value) && value >= min && value <= max
+		? value
+		: fallback;
+
 // Sveltia's colour widget supplies hex colours.
 const colour = (value: unknown, fallback: string) =>
 	typeof value === 'string' && /^#[\da-fA-F]{3}([\da-fA-F]{3})?$/.test(value)
@@ -26,7 +44,19 @@ export const load: LayoutServerLoad = async () => {
 	const scheme = await getOne('colour-schemes', slug);
 	if (!scheme) throw new Error(`Colour scheme "${slug}" was not found in content/colour-schemes`);
 
+	const typographySlug = typeof settings.activeTypography === 'string' && settings.activeTypography
+		? settings.activeTypography : 'default';
+	const preset = await getOne('typography', typographySlug);
+	if (!preset) throw new Error(`Typography preset "${typographySlug}" was not found in content/typography`);
+
 	return {
+		typography: {
+			bodyFont: fontStack(preset.bodyFont, defaultTypography.bodyFont),
+			headingFont: fontStack(preset.headingFont, defaultTypography.headingFont),
+			fontSize: boundedNumber(preset.fontSize, defaultTypography.fontSize, 12, 28),
+			fontScale: boundedNumber(preset.fontScale, defaultTypography.fontScale, 1, 1.6),
+			lineHeight: boundedNumber(preset.lineHeight, defaultTypography.lineHeight, 1, 2.2)
+		},
 		siteName: typeof settings.siteName === 'string' ? settings.siteName : '',
 		siteLogo: typeof settings.siteLogo === 'string' ? settings.siteLogo : '',
 		navigation: (await getOne('navigation', 'main-menu'))?.items ?? [],

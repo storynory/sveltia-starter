@@ -38,6 +38,7 @@ await write('pages', 'about', { title: 'About' });
 await write('pages', 'draft', { title: 'Draft', draft: true });
 await write('settings', 'general', { homePage: 'home', siteName: 'Test Site', siteLogo: '/logo.svg' });
 await write('colour-schemes', 'default', { title: 'Default', prime: '#123456' });
+await write('typography', 'default', { title: 'System Sans', bodyFont: 'Arial, sans-serif', headingFont: 'Georgia, serif', fontSize: 17, fontScale: 1.2, lineHeight: 1.6 });
 await write('navigation', 'main-menu', { title: 'Main', items: [
 	{ label: 'About', url: '/pages/about/', newTab: false, children: [
 		{ label: 'External', url: 'https://example.com', newTab: true }
@@ -106,6 +107,8 @@ test('root layout exposes branding and nested navigation alongside the selected 
 	assert.equal(data?.siteName, 'Test Site');
 	assert.equal(data?.siteLogo, '/logo.svg');
 	assert.equal(data?.colours.prime, '#123456');
+	assert.equal(data?.typography.bodyFont, 'Arial, sans-serif');
+	assert.equal(data?.typography.fontSize, 17);
 	assert.equal(data?.navigation[0].url, '/pages/about/');
 	assert.deepEqual(data?.navigation[0].children, [
 		{ label: 'External', url: 'https://example.com', newTab: true }

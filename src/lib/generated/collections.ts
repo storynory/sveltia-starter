@@ -176,6 +176,11 @@ export const collections = {
             "collection": "colour-schemes",
             "multiple": false,
             "valueField": "{{slug}}"
+          },
+          "activeTypography": {
+            "collection": "typography",
+            "multiple": false,
+            "valueField": "{{slug}}"
           }
         }
       }
@@ -188,6 +193,17 @@ export const collections = {
     "template": "default",
     "listTemplate": "default",
     "folder": "content/tags",
+    "extension": "yml",
+    "format": "yaml",
+    "relations": {}
+  },
+  "typography": {
+    "kind": "folder",
+    "publicRoute": false,
+    "rss": false,
+    "template": "default",
+    "listTemplate": "default",
+    "folder": "content/typography",
     "extension": "yml",
     "format": "yaml",
     "relations": {}
