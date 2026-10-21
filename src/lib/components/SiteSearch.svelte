@@ -11,24 +11,28 @@
 		categories: string[];
 		tags: string[];
 	};
-	let { indexUrl = '/api/search-index/' }: { indexUrl?: string } = $props();
+
+	let { indexUrl = '/api/search-index' }: { indexUrl?: string } = $props();
+
 	let query = $state('');
 	let items = $state<SearchItem[]>([]);
 	let loading = $state(true);
 	let loadError = $state('');
 
-	const fuse = $derived(new Fuse(items, {
-		includeScore: true,
-		ignoreLocation: true,
-		threshold: 0.3,
-		keys: [
-			{ name: 'title', weight: 5 },
-			{ name: 'categories', weight: 4 },
-			{ name: 'tags', weight: 3 },
-			{ name: 'excerpt', weight: 2 },
-			{ name: 'text', weight: 1 }
-		]
-	}));
+	const fuse = $derived(
+		new Fuse(items, {
+			includeScore: true,
+			ignoreLocation: true,
+			threshold: 0.3,
+			keys: [
+				{ name: 'title', weight: 5 },
+				{ name: 'categories', weight: 4 },
+				{ name: 'tags', weight: 3 },
+				{ name: 'excerpt', weight: 2 },
+				{ name: 'text', weight: 1 }
+			]
+		})
+	);
 	const terms = $derived(query.trim().split(/\s+/).filter(Boolean));
 	// Searching each word separately allows "Chinese dragon" to match a category
 	// and a tag, even when the words don't occur in the same field.
@@ -65,7 +69,13 @@
 
 <form role="search" onsubmit={(event) => event.preventDefault()}>
 	<label for="site-search">Search the site</label>
-	<input id="site-search" type="search" bind:value={query} placeholder="Search stories and pages…" autocomplete="off" />
+	<input
+		id="site-search"
+		type="search"
+		bind:value={query}
+		placeholder="Search stories and pages…"
+		autocomplete="off"
+	/>
 </form>
 
 {#if loading}
@@ -79,21 +89,56 @@
 			<li>
 				<h2><a href={item.url}>{item.title}</a></h2>
 				{#if item.excerpt}<p>{item.excerpt}</p>{/if}
-				<small>{item.collection}{item.categories.length ? ` · ${item.categories.join(', ')}` : ''}</small>
+				<small
+					>{item.collection}{item.categories.length
+						? ` · ${item.categories.join(', ')}`
+						: ''}</small
+				>
 			</li>
 		{/each}
 	</ul>
 {/if}
 
 <style>
-	form { display: grid; gap: 0.5rem; }
-	label { font-weight: bold; }
-	input { width: 100%; padding: 0.8rem; border: 1px solid var(--prime); border-radius: var(--radius); font: inherit; background: var(--second); color: var(--text); }
-	input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-	ul { list-style: none; padding: 0; }
-	li { padding: 1rem 0; border-bottom: 1px solid var(--gray); }
-	h2 { margin: 0 0 0.35rem; font-size: 1.2rem; }
-	h2 a { color: var(--accent); }
-	p { margin: 0.4rem 0; }
-	small { opacity: 0.75; }
+	form {
+		display: grid;
+		gap: 0.5rem;
+	}
+	label {
+		font-weight: bold;
+	}
+	input {
+		width: 100%;
+		padding: 0.8rem;
+		border: 1px solid var(--prime);
+		border-radius: var(--radius);
+		font: inherit;
+		background: var(--second);
+		color: var(--text);
+	}
+	input:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+	ul {
+		list-style: none;
+		padding: 0;
+	}
+	li {
+		padding: 1rem 0;
+		border-bottom: 1px solid var(--gray);
+	}
+	h2 {
+		margin: 0 0 0.35rem;
+		font-size: 1.2rem;
+	}
+	h2 a {
+		color: var(--accent);
+	}
+	p {
+		margin: 0.4rem 0;
+	}
+	small {
+		opacity: 0.75;
+	}
 </style>
