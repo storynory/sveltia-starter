@@ -16,6 +16,11 @@
 
 <div
 	class="site"
+	style:--font-body={data.typography.bodyFont}
+	style:--font-heading={data.typography.headingFont}
+	style:--font-size={`${data.typography.fontSize}px`}
+	style:--font-scale={data.typography.fontScale}
+	style:--line-height={data.typography.lineHeight}
 	style:--prime={data.colours.prime}
 	style:--accent={data.colours.accent}
 	style:--second={data.colours.second}
