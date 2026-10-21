@@ -8,6 +8,7 @@ defaultImage: /uploads/relaxivity3.jpg
 language: en-GB
 homePage: home
 activeScheme: warm-ivory-forest-green
+activeTypography: default
 social: null
 footer: null
 rss:
