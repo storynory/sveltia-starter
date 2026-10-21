@@ -125,6 +125,7 @@ export type SettingsGeneralContent = {
 	"language": string;
 	"homePage": string;
 	"activeScheme"?: string;
+	"activeTypography"?: string;
 	"social"?: {
 		"facebook"?: string;
 		"instagram"?: string;
@@ -169,6 +170,15 @@ export type TagsContent = {
 	};
 };
 
+export type TypographyContent = {
+	"title": string;
+	"bodyFont": string;
+	"headingFont": string;
+	"fontSize": number;
+	"fontScale": number;
+	"lineHeight": number;
+};
+
 export type ContentByCollection = {
 	"blocks": BlocksContent;
 	"categories": CategoriesContent;
@@ -182,4 +192,5 @@ export type ContentByCollection = {
 		"general": SettingsGeneralContent;
 	};
 	"tags": TagsContent;
+	"typography": TypographyContent;
 };
