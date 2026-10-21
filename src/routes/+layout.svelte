@@ -32,5 +32,5 @@
 </div>
 
 <style>
-	.site { color: var(--text); min-height: 100vh; }
+	.site { color: var(--text); min-height: 100vh; font: var(--font-size) / var(--line-height) var(--font-body); }
 </style>
