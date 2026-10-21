@@ -73,6 +73,16 @@ collections:
             required: false
 
 
+          - name: activeTypography
+            label: Active Typography Preset
+            widget: relation
+            collection: typography
+            value_field: "{{slug}}"
+            search_fields: [title]
+            display_fields: [title]
+            required: false
+            hint: Select a saved typography preset independently of the colour scheme.
+
           - name: social
             label: Social Links
             widget: object
