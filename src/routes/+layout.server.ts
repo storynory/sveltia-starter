@@ -49,14 +49,7 @@ export const load: LayoutServerLoad = async () => {
 	const preset = await getOne('typography', typographySlug);
 	if (!preset) throw new Error(`Typography preset "${typographySlug}" was not found in content/typography`);
 
-	// Explicitly opt in to a Formspree recipient per website. Never use a shared default.
-	const configuredEndpoint = settings.contactFormEndpoint;
-	const contactFormEndpoint = typeof configuredEndpoint === 'string' &&
-		/^https:\/\/formspree\.io\/f\/[A-Za-z0-9]+$/.test(configuredEndpoint.trim())
-			? configuredEndpoint.trim() : '';
-
 	return {
-		contactFormEndpoint,
 		typography: {
 			bodyFont: fontStack(preset.bodyFont, defaultTypography.bodyFont),
 			headingFont: fontStack(preset.headingFont, defaultTypography.headingFont),
