@@ -53,3 +53,26 @@ img { max-width: 100%; }
 .-p-lg { padding: 1em; }
 .-m-b { margin-bottom: 1em; }
 .-m-y { margin-block: 1em; }
+
+/* Plain form controls should look good anywhere on the site. */
+input, textarea, select, button { font: inherit; }
+input, textarea, select {
+  width: 100%;
+  padding: 0.65em;
+  color: var(--text);
+  background: #fff;
+  border: 1px solid var(--text);
+  border-radius: 0.3rem;
+}
+button {
+  padding: 0.65em 1em;
+  color: #fff;
+  background: var(--accent);
+  border: 0;
+  border-radius: 0.3rem;
+  cursor: pointer;
+}
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
