@@ -1,4 +1,5 @@
 <script lang="ts">
+  // Demo only: native browser validation, no submission or email delivery.
   let tested = $state(false);
 
   function tryForm(event: SubmitEvent) {
@@ -16,6 +17,7 @@
   <h1>Get in touch</h1>
   <p>Have a question or an idea? Send us a message.</p>
 
+  <!-- For a real site, replace onsubmit with a site-specific form action and method="POST". -->
   <form onsubmit={tryForm}>
     <div>
       <label for="contact-name">Name</label>
@@ -31,10 +33,10 @@
     </div>
     <button class="button" type="submit">Test form</button>
     {#if tested}
-      <p role="status">The form passes browser validation. Email delivery hasn't been connected yet, so no message was sent.</p>
+      <p role="status">The form passes browser validation. This is a demo: no message was sent.</p>
     {/if}
   </form>
-  <p class="note">This is a demonstration form. It does not send messages yet.</p>
+  <p class="note">Demo only — no email is sent. Connect a provider when adapting Starter for a real site.</p>
 </main>
 
 <style>
