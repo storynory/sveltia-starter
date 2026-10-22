@@ -56,7 +56,7 @@ img { max-width: 100%; }
 
 /* Plain form controls should look good anywhere on the site. */
 input, textarea, select, button { font: inherit; }
-input, textarea, select {
+input:not([type]), input:is([type='text'], [type='email'], [type='url'], [type='tel'], [type='search'], [type='password'], [type='number']), textarea, select {
   width: 100%;
   padding: 0.65em;
   color: var(--text);
