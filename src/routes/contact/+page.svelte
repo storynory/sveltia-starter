@@ -1,3 +1,8 @@
+<script lang="ts">
+  import type { PageData } from './$types';
+  let { data }: { data: PageData } = $props();
+</script>
+
 <svelte:head>
   <title>Contact</title>
   <meta name="description" content="Get in touch with us." />
@@ -7,7 +12,8 @@
   <h1>Get in touch</h1>
   <p>Have a question or an idea? Send us a message.</p>
 
-  <form action="https://formspree.io/f/xljjrvwj" method="POST">
+  {#if data.contactFormEndpoint}
+  <form action={data.contactFormEndpoint} method="POST">
     <div>
       <label for="contact-name">Name</label>
       <input class="form-control" id="contact-name" name="name" autocomplete="name" required />
@@ -22,6 +28,9 @@
     </div>
     <button class="button" type="submit">Send message</button>
   </form>
+  {:else}
+    <p>Contact form not configured yet.</p>
+  {/if}
 </main>
 
 <style>
