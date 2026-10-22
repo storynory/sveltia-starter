@@ -19,17 +19,17 @@
   <form onsubmit={tryForm}>
     <div>
       <label for="contact-name">Name</label>
-      <input id="contact-name" name="name" autocomplete="name" required />
+      <input class="form-control" id="contact-name" name="name" autocomplete="name" required />
     </div>
     <div>
       <label for="contact-email">Email</label>
-      <input id="contact-email" name="email" type="email" autocomplete="email" required />
+      <input class="form-control" id="contact-email" name="email" type="email" autocomplete="email" required />
     </div>
     <div>
       <label for="contact-message">Message</label>
-      <textarea id="contact-message" name="message" rows="6" required></textarea>
+      <textarea class="form-control" id="contact-message" name="message" rows="6" required></textarea>
     </div>
-    <button type="submit">Test form</button>
+    <button class="button" type="submit">Test form</button>
     {#if tested}
       <p role="status">The form passes browser validation. Email delivery hasn't been connected yet, so no message was sent.</p>
     {/if}
