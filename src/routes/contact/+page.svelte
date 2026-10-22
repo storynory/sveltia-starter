@@ -1,12 +1,3 @@
-<script lang="ts">
-  let tested = $state(false);
-
-  function tryForm(event: SubmitEvent) {
-    event.preventDefault();
-    tested = true;
-  }
-</script>
-
 <svelte:head>
   <title>Contact</title>
   <meta name="description" content="Get in touch with us." />
@@ -16,7 +7,7 @@
   <h1>Get in touch</h1>
   <p>Have a question or an idea? Send us a message.</p>
 
-  <form onsubmit={tryForm}>
+  <form action="https://formspree.io/f/xljjrvwj" method="POST">
     <div>
       <label for="contact-name">Name</label>
       <input class="form-control" id="contact-name" name="name" autocomplete="name" required />
@@ -29,12 +20,8 @@
       <label for="contact-message">Message</label>
       <textarea class="form-control" id="contact-message" name="message" rows="6" required></textarea>
     </div>
-    <button class="button" type="submit">Test form</button>
-    {#if tested}
-      <p role="status">The form passes browser validation. Email delivery hasn't been connected yet, so no message was sent.</p>
-    {/if}
+    <button class="button" type="submit">Send message</button>
   </form>
-  <p class="note">This is a demonstration form. It does not send messages yet.</p>
 </main>
 
 <style>
@@ -42,5 +29,4 @@
   form { display: grid; gap: var(--space); max-width: 36rem; }
   form > div { display: grid; gap: 0.35rem; }
   button { justify-self: start; }
-  .note { margin-top: var(--space); font-size: 0.9em; }
 </style>
