@@ -12,3 +12,11 @@ items:
     url: /search/
     newTab: false
     children: []
+  - label: Podcasts
+    url: /podcasts/
+    newTab: false
+    children: []
+  - label: Contact
+    url: /contact/
+    newTab: false
+    children: []
