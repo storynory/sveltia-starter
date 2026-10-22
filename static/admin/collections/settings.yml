@@ -83,12 +83,6 @@ collections:
             required: false
             hint: Select a saved typography preset independently of the colour scheme.
 
-          - name: contactFormEndpoint
-            label: Contact Formspree Endpoint
-            widget: string
-            required: false
-            hint: Optional. Paste this site's own https://formspree.io/f/... endpoint. Leave blank to disable the contact form.
-
           - name: social
             label: Social Links
             widget: object
