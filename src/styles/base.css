@@ -54,18 +54,20 @@ img { max-width: 100%; }
 .-m-b { margin-bottom: 1em; }
 .-m-y { margin-block: 1em; }
 
-/* Plain form controls should look good anywhere on the site. */
-input, textarea, select, button { font: inherit; }
-input:not([type]), input:is([type='text'], [type='email'], [type='url'], [type='tel'], [type='search'], [type='password'], [type='number']), textarea, select {
+/* Opt-in form styling: specialised inputs keep their native appearance. */
+.form-control {
+  display: block;
   width: 100%;
   padding: 0.65em;
+  font: inherit;
   color: var(--text);
   background: #fff;
   border: 1px solid var(--text);
   border-radius: 0.3rem;
 }
-button {
+.button {
   padding: 0.65em 1em;
+  font: inherit;
   color: #fff;
   background: var(--accent);
   border: 0;
