@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import type { NavigationContent } from '#lib/generated/types.ts';
 
   let {
@@ -12,11 +13,13 @@
   } = $props();
 
   let menuOpen = $state(false);
+  let enhanced = $state(false);
+  onMount(() => { enhanced = true; });
   let openDropdown = $state<number | null>(null);
   const closeMenu = () => { menuOpen = false; openDropdown = null; };
 </script>
 
-<header>
+<header class:enhanced>
   <div class="container header-inner">
     <a class="brand" href="/" onclick={closeMenu}>
       {#if siteLogo}<img src={siteLogo} alt="" />{/if}
@@ -158,7 +161,7 @@
 
   @media (max-width: 48rem) {
     .header-inner { flex-wrap: wrap; }
-    .menu-toggle {
+    .enhanced .menu-toggle {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -171,8 +174,9 @@
       color: var(--text);
       cursor: pointer;
     }
-    nav { display: none; flex-basis: 100%; }
-    nav.open { display: block; }
+    nav { flex-basis: 100%; }
+    .enhanced nav { display: none; }
+    .enhanced nav.open { display: block; }
     .primary { display: block; border-top: 1px solid var(--gray); padding-top: .5rem; }
     .primary > li { margin: 0; }
     .primary > li > a, .nav-label { display: flex; padding: .65rem .25rem; }
