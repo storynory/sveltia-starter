@@ -1,15 +1,15 @@
 title: Latest Posts
 type: latest
-heading: Latest Posts
-introduction: Discover our newest posts.
-image: ''
-imageAlt: ''
+heading: Latest Podcasts
+introduction: Discover our newest podcasts
+image: /uploads/dragon-horse.png
+imageAlt: dragon fights monkey
 imagePosition: right
-buttonText: ''
-buttonUrl: ''
+buttonText: Podcasts
+buttonUrl: /podcasts/
 collection: podcasts
 category: ''
 tags: []
 tagMatch: any
-limit: 4
+limit: 3
 items: []
