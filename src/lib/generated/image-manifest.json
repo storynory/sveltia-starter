@@ -21,6 +21,19 @@
     ],
     "fallback": "/optimized/buddha-videoart.600.jpg"
   },
+  "/uploads/dragon-horse.png": {
+    "width": 1312,
+    "height": 912,
+    "sizes": [
+      320,
+      640,
+      960
+    ],
+    "formats": [
+      "webp"
+    ],
+    "fallback": "/optimized/dragon-horse.640.jpg"
+  },
   "/uploads/green-willow-videoart.webp": {
     "width": 600,
     "height": 337,

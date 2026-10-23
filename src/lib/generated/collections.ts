@@ -81,7 +81,7 @@ export const collections = {
   },
   "people": {
     "kind": "folder",
-    "publicRoute": false,
+    "publicRoute": true,
     "rss": false,
     "template": "default",
     "listTemplate": "default",
