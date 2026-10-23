@@ -19,7 +19,7 @@
   const description = $derived(text(seo.description) || text(item.excerpt) || text(site.siteDescription));
   const imagePath = $derived(text(seo.image) || text(item.featuredImage) || text(site.defaultImage));
   const base = $derived(text(site.siteUrl).replace(/\/$/, ''));
-  const canonical = $derived(base ? base + page.url.pathname.replace(/\/$/, '') + (page.url.pathname === '/' ? '/' : '') : '');
+  const canonical = $derived(base ? base + (page.url.pathname.endsWith('/') ? page.url.pathname : page.url.pathname + '/') : '');
   const image = $derived(imagePath && base
     ? new URL(imagePath, base + '/').href
     : /^https?:\/\//.test(imagePath) ? imagePath : '');
