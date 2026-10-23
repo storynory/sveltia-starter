@@ -30,15 +30,27 @@ export const GET: RequestHandler = async () => {
 			return {
 				title: asText(record.title) || asText(record.name) || item.slug,
 				excerpt: asText(record.excerpt) || asText(record.description),
-				text: asText(record.html).replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim(),
 				url: collection === 'pages' && item.slug === home
 					? '/'
 					: `/${collection}/${encodeURIComponent(item.slug)}/`,
 				collection,
+				kind: 'content',
 				categories: relationNames(record.category),
 				tags: relationNames(record.tags)
 			};
 		});
 	}));
-	return json(groups.flat());
+  const archives = await Promise.all((['categories', 'tags'] as const).map(async (collection) => {
+    const terms = await getAll(collection);
+    return terms.map((term) => ({
+      title: term.title,
+      excerpt: asText(term.description),
+      url: `/${collection === 'categories' ? 'category' : 'tag'}/${encodeURIComponent(term.slug)}/`,
+      collection,
+      kind: collection === 'categories' ? 'category' : 'tag',
+      categories: [],
+      tags: []
+    }));
+  }));
+  return json([...archives.flat(), ...groups.flat()]);
 };
