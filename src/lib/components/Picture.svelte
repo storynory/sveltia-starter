@@ -27,6 +27,8 @@
 	}: Props = $props();
 
 	const image = $derived(pictureSources(src, manifest as ImageManifest));
+	const imageWidth = $derived(image.width ?? width);
+	const imageHeight = $derived(image.height ?? height);
 	const imageLoading = $derived(loading ?? (priority === 'high' ? 'eager' : 'lazy'));
 	const imagePriority = $derived(fetchpriority ?? (priority === 'high' ? 'high' : undefined));
 </script>
@@ -41,11 +43,12 @@
 		loading={imageLoading}
 		fetchpriority={imagePriority}
 		class={className}
-		width={image.width ?? width}
-		height={image.height ?? height}
+		width={imageWidth}
+		height={imageHeight}
+		style:aspect-ratio={imageWidth && imageHeight ? `${imageWidth} / ${imageHeight}` : undefined}
 	/>
 </picture>
 
 <style>
-	img { max-width: 100%; height: auto; }
+	img { display: block; max-width: 100%; height: auto; }
 </style>
