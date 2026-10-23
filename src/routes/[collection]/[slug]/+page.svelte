@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
+	import SeoMeta from '#lib/components/SeoMeta.svelte';
 	import { templates } from '#lib/generated/templates.ts';
 
 	let { data }: { data: PageData } = $props();
@@ -7,5 +8,5 @@
 	const Template = $derived(templates[selected] ?? templates.default);
 </script>
 
-<svelte:head><title>{data.title}</title></svelte:head>
+<SeoMeta title={data.title} item={data.item} />
 <Template {data} />
