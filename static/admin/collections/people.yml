@@ -9,6 +9,7 @@ collections:
     format: yaml
     slug: "{{slug}}"
     identifier_field: name
+    public_route: true
 
     fields:
       - name: name
