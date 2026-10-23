@@ -2,6 +2,14 @@ title: Latest Posts
 type: latest
 heading: Latest Posts
 introduction: Discover our newest posts.
-collection: posts
-limit: 4
+image: ''
+imageAlt: ''
+imagePosition: right
+buttonText: ''
+buttonUrl: ''
+collection: podcasts
+category: ''
+tags: []
 tagMatch: any
+limit: 4
+items: []
