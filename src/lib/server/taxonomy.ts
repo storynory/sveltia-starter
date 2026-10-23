@@ -1,8 +1,9 @@
 import { getAll, getOne } from '#lib/server/content.ts';
-import { published } from '#lib/server/public-routes.ts';
+import { publicCollections, published } from '#lib/server/public-routes.ts';
+import { collections } from '#lib/generated/collections.ts';
 
 export type TaxonomyKind = 'category' | 'tag';
-export type ArchiveItem = { collection: 'posts' | 'podcasts'; slug: string; title: string; excerpt: string; date: string };
+export type ArchiveItem = { collection: string; slug: string; title: string; excerpt: string; date: string };
 
 const stringValue = (v: unknown) => typeof v === 'string' ? v : '';
 const slugOf = (v: unknown): string => typeof v === 'string' ? v : v && typeof v === 'object' && 'slug' in v ? stringValue(v.slug) : '';
@@ -36,7 +37,11 @@ export async function archive(kind: TaxonomyKind, slug: string) {
     }
   }
 
-  const content = await Promise.all((['posts', 'podcasts'] as const).map(async (name) => {
+  const eligible = publicCollections().filter((name) => {
+    const relations = collections[name].relations as Record<string, { collection: string }>;
+    return kind === 'category' ? relations.category?.collection === 'categories' : relations.tags?.collection === 'tags';
+  });
+  const content = await Promise.all(eligible.map(async (name) => {
     const items = await getAll(name, (records) => records.filter(({ data }) => {
       if (!published(data)) return false;
       return kind === 'category'
@@ -46,7 +51,7 @@ export async function archive(kind: TaxonomyKind, slug: string) {
     return items.map((item): ArchiveItem => ({
       collection: name,
       slug: item.slug,
-      title: item.title,
+      title: stringValue(item.title) || item.slug,
       excerpt: stringValue('excerpt' in item ? item.excerpt : '') || stringValue('description' in item ? item.description : ''),
       date: stringValue(item.date)
     }));
