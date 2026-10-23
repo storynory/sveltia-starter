@@ -5,9 +5,9 @@
 	type SearchItem = {
 		title: string;
 		excerpt: string;
-		text: string;
 		url: string;
 		collection: string;
+		kind: 'category' | 'tag' | 'content';
 		categories: string[];
 		tags: string[];
 	};
@@ -26,10 +26,9 @@
 			threshold: 0.3,
 			keys: [
 				{ name: 'title', weight: 5 },
-				{ name: 'categories', weight: 4 },
-				{ name: 'tags', weight: 3 },
-				{ name: 'excerpt', weight: 2 },
-				{ name: 'text', weight: 1 }
+				{ name: 'excerpt', weight: 3 },
+				{ name: 'categories', weight: 2 },
+				{ name: 'tags', weight: 2 }
 			]
 		})
 	);
@@ -50,7 +49,10 @@
 		}
 		return [...scores.values()]
 			.filter((entry) => entry.matches === terms.length)
-			.sort((a, b) => a.score - b.score)
+			.sort((a, b) => {
+        const priority = (item: SearchItem) => item.kind === 'category' ? 0 : item.kind === 'tag' ? 1 : 2;
+        return priority(a.item) - priority(b.item) || a.score - b.score;
+      })
 			.map((entry) => entry.item);
 	});
 
@@ -90,7 +92,7 @@
 				<h2><a href={item.url}>{item.title}</a></h2>
 				{#if item.excerpt}<p>{item.excerpt}</p>{/if}
 				<small
-					>{item.collection}{item.categories.length
+					>{item.kind === 'category' ? 'Category' : item.kind === 'tag' ? 'Tag' : item.collection}{item.categories.length
 						? ` · ${item.categories.join(', ')}`
 						: ''}</small
 				>
