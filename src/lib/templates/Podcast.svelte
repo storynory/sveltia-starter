@@ -21,6 +21,7 @@
 	const html = $derived(textField(item, 'html'));
 </script>
 
+<main>
 <article>
 	<header>
 		<h1>{data.title}</h1>
@@ -54,6 +55,7 @@
 	{#if description}<p class="description">{description}</p>{/if}
 	{#if html}<section class="content" aria-label="Transcript and show notes">{@html html}</section>{/if}
 </article>
+</main>
 
 <style>
 	article { max-width: var(--content-width); margin: 3em auto; padding: 0 var(--space); line-height: var(--line-height); }

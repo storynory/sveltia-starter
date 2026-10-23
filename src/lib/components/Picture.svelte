@@ -6,6 +6,8 @@
 		src: string;
 		alt: string;
 		sizes?: string;
+		width?: number;
+		height?: number;
 		loading?: 'lazy' | 'eager';
 		priority?: 'high' | 'auto';
 		fetchpriority?: 'high' | 'low' | 'auto';
@@ -16,6 +18,8 @@
 		src,
 		alt,
 		sizes = '100vw',
+		width,
+		height,
 		loading,
 		priority = 'auto',
 		fetchpriority,
@@ -23,6 +27,8 @@
 	}: Props = $props();
 
 	const image = $derived(pictureSources(src, manifest as ImageManifest));
+	const imageWidth = $derived(image.width ?? width);
+	const imageHeight = $derived(image.height ?? height);
 	const imageLoading = $derived(loading ?? (priority === 'high' ? 'eager' : 'lazy'));
 	const imagePriority = $derived(fetchpriority ?? (priority === 'high' ? 'high' : undefined));
 </script>
@@ -37,8 +43,12 @@
 		loading={imageLoading}
 		fetchpriority={imagePriority}
 		class={className}
-		width={image.width}
-		height={image.height}
-		style="max-width: 100%; height: auto;"
+		width={imageWidth}
+		height={imageHeight}
+		style:aspect-ratio={imageWidth && imageHeight ? `${imageWidth} / ${imageHeight}` : undefined}
 	/>
 </picture>
+
+<style>
+	img { display: block; max-width: 100%; height: auto; }
+</style>

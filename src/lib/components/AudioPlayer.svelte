@@ -46,7 +46,7 @@
 	}
 </script>
 
-<div class="audio-player" aria-label={title}>
+<div class="audio-player" role="group" aria-label={title}>
 	<audio
 		bind:this={audio}
 		{src}
@@ -68,9 +68,9 @@
 		<button type="button" onclick={() => jump(10)} aria-label="Go forward 10 seconds" title="Forward 10 seconds">10 ↷</button>
 	</div>
 
-	<input aria-label="Playback position" type="range" min="0" max="100" step="0.1" value={progress} oninput={seek} disabled={!duration} />
+	<input aria-label="Playback position" type="range" min="0" max="100" step="0.1" value={progress} oninput={seek} aria-valuetext={`${formatTime(current)} of ${formatTime(duration)}`} disabled={!Number.isFinite(duration) || duration <= 0} />
 	<div class="time"><span>{formatTime(current)}</span><span>{formatTime(duration)}</span></div>
-	{#if status}<p role="status">{status}</p>{/if}
+	<p role="status">{status}</p>
 	<a class="download" href={src} download>Download audio</a>
 </div>
 
@@ -91,4 +91,5 @@
 	.time { display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; }
 	.download { display: inline-block; margin-top: .35rem; color: var(--accent); }
 	p { margin: .5rem 0; }
+	p:empty { margin: 0; }
 </style>

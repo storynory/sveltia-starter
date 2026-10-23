@@ -15,6 +15,7 @@
 	const html = $derived(textField(item, 'html'));
 </script>
 
+<main>
 <article>
 	<header>
 		<h1>{title}</h1>
@@ -32,6 +33,7 @@
 		<footer>{#each tags as tag}<span class="tag">{tag}</span>{/each}</footer>
 	{/if}
 </article>
+</main>
 
 <style>
 	article { max-width: var(--content-width); margin: 3em auto; padding: 0 var(--space); line-height: var(--line-height); }
