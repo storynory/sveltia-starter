@@ -55,6 +55,10 @@ export type NavigationContent = {
 export type PagesContent = {
 	"title": string;
 	"excerpt"?: string;
+	"seo"?: {
+		"title"?: string;
+		"description"?: string;
+	};
 	"layout"?: "standard" | "wide";
 	"body"?: string;
 	"blocks"?: string[];
