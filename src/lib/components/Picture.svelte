@@ -6,6 +6,8 @@
 		src: string;
 		alt: string;
 		sizes?: string;
+		width?: number;
+		height?: number;
 		loading?: 'lazy' | 'eager';
 		priority?: 'high' | 'auto';
 		fetchpriority?: 'high' | 'low' | 'auto';
@@ -16,6 +18,8 @@
 		src,
 		alt,
 		sizes = '100vw',
+		width,
+		height,
 		loading,
 		priority = 'auto',
 		fetchpriority,
@@ -37,8 +41,11 @@
 		loading={imageLoading}
 		fetchpriority={imagePriority}
 		class={className}
-		width={image.width}
-		height={image.height}
-		style="max-width: 100%; height: auto;"
+		width={image.width ?? width}
+		height={image.height ?? height}
 	/>
 </picture>
+
+<style>
+	img { max-width: 100%; height: auto; }
+</style>

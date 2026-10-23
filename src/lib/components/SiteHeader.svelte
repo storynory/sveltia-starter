@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import Picture from '#lib/components/Picture.svelte';
   import type { NavigationContent } from '#lib/generated/types.ts';
 
   let {
@@ -14,21 +15,44 @@
 
   let menuOpen = $state(false);
   let enhanced = $state(false);
-  onMount(() => { enhanced = true; });
+  let mobile = $state(false);
+  let menuButton = $state<HTMLButtonElement>();
+  onMount(() => {
+    enhanced = true;
+    const media = window.matchMedia('(max-width: 48rem)');
+    const update = () => { mobile = media.matches; };
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  });
+  function dismiss(event: KeyboardEvent) {
+    if (event.key !== 'Escape') return;
+    const target = event.target as HTMLElement;
+    if (openDropdown !== null) {
+      target.closest('li')?.querySelector('button')?.focus();
+      openDropdown = null;
+    } else if (menuOpen) {
+      closeMenu();
+      menuButton?.focus();
+    }
+  }
   let openDropdown = $state<number | null>(null);
   const closeMenu = () => { menuOpen = false; openDropdown = null; };
 </script>
 
+<svelte:window onkeydown={dismiss} />
+
 <header class:enhanced>
   <div class="container header-inner">
     <a class="brand" href="/" onclick={closeMenu}>
-      {#if siteLogo}<img src={siteLogo} alt="" />{/if}
+      {#if siteLogo}<Picture src={siteLogo} alt="" sizes="128px" loading="eager" class="brand-logo" />{/if}
       <span>{siteName}</span>
     </a>
 
     {#if items.length}
       <button
         class="menu-toggle"
+        bind:this={menuButton}
         type="button"
         aria-controls="main-navigation"
         aria-expanded={menuOpen}
@@ -41,7 +65,13 @@
       <nav id="main-navigation" aria-label="Main" class:open={menuOpen}>
         <ul class="primary">
           {#each items as item, index}
-            <li class:expanded={openDropdown === index}>
+            <li
+              class:expanded={openDropdown === index}
+              class:disclosure={!item.url && !!item.children?.length}
+              onmouseenter={() => { if (!mobile && !item.url && item.children?.length) openDropdown = index; }}
+              onmouseleave={(event) => { if (!mobile && !event.currentTarget.contains(document.activeElement)) openDropdown = null; }}
+              onfocusout={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node)) openDropdown = null; }}
+            >
               {#if item.url}
                 <a
                   href={item.url}
@@ -60,7 +90,8 @@
                   <button
                     type="button"
                     class="nav-label dropdown-toggle"
-                    aria-expanded={openDropdown === index}
+                    aria-controls={`submenu-${index}`}
+                    aria-expanded={mobile || openDropdown === index}
                     onclick={() => (openDropdown = openDropdown === index ? null : index)}
                   >{item.label}</button>
                 {:else}
@@ -68,7 +99,7 @@
                 {/if}
               {/if}
               {#if item.children?.length}
-                <ul class="submenu">
+                <ul class="submenu" id={`submenu-${index}`}>
                   {#each item.children as child}
                     <li>
                       <a
@@ -112,7 +143,7 @@
     text-decoration: none;
     overflow-wrap: anywhere;
   }
-  .brand img { max-width: 8rem; max-height: 3rem; width: auto; height: auto; }
+  .brand :global(.brand-logo) { max-width: 8rem; max-height: 3rem; width: auto; height: auto; }
   nav { min-width: 0; }
   ul { margin: 0; padding: 0; list-style: none; }
   .primary { display: flex; align-items: center; flex-wrap: wrap; gap: calc(var(--space) / 2) var(--space); }
@@ -144,6 +175,7 @@
   .primary > li:hover > .submenu,
   .primary > li:focus-within > .submenu,
   .primary > li.expanded > .submenu { display: block; }
+  .enhanced .primary > li.disclosure:not(.expanded) > .submenu { display: none; }
   .menu-toggle { display: none; }
   .icon {
     display: inline-block;
@@ -180,6 +212,7 @@
     .primary { display: block; border-top: 1px solid var(--gray); padding-top: .5rem; }
     .primary > li { margin: 0; }
     .primary > li > a, .nav-label { display: flex; padding: .65rem .25rem; }
+    .enhanced .primary > li.disclosure:not(.expanded) > .submenu { display: block; }
     .submenu, .primary > li:hover > .submenu, .primary > li:focus-within > .submenu, .primary > li.expanded > .submenu {
       display: block;
       position: static;

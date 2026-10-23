@@ -5,10 +5,12 @@
 	const html = $derived(textField(data.item, 'html'));
 </script>
 
+<main>
 <article>
 	<h1>{data.title}</h1>
 	<div class="content">{@html html}</div>
 </article>
+</main>
 
 <style>
 	article { max-width: var(--content-width); margin: 3em auto; padding: 0 var(--space); line-height: var(--line-height); }

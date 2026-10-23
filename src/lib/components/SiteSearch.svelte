@@ -80,12 +80,13 @@
 	/>
 </form>
 
-{#if loading}
-	<p>Loading search…</p>
-{:else if loadError}
-	<p role="alert">{loadError}</p>
-{:else if terms.length}
-	<p aria-live="polite">{results.length} {results.length === 1 ? 'result' : 'results'} found</p>
+<p role="status">
+	{#if loading}Loading search…
+	{:else if loadError}{loadError}
+	{:else if terms.length}{results.length} {results.length === 1 ? 'result' : 'results'} found{/if}
+</p>
+
+{#if !loading && !loadError && terms.length}
 	<ul>
 		{#each results as item (item.url)}
 			<li>

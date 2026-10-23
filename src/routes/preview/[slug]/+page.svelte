@@ -8,6 +8,7 @@
 	<title>{data.title}</title>
 </svelte:head>
 
+<main>
 <article>
 	<header>
 		<h1>{data.title}</h1>
@@ -39,6 +40,7 @@
 		{@html data.html}
 	</div>
 </article>
+</main>
 
 <style>
 	article {

@@ -48,3 +48,27 @@ test('all local links in prerendered HTML point to built files', async () => {
 	}
 	assert.deepEqual(missing, [], 'Broken internal links in prerendered pages');
 });
+
+
+test('public prerendered pages have exactly one main landmark', async () => {
+	const pages = (await htmlFiles(buildDir)).filter((file) =>
+		!path.relative(buildDir, file).startsWith('admin' + path.sep)
+	);
+	assert.ok(pages.length, 'Run npm run build first');
+	for (const page of pages) {
+		const html = await fs.readFile(page, 'utf8');
+		assert.equal([...html.matchAll(/<main(?:\s|>)/g)].length, 1, path.relative(buildDir, page));
+		assert.equal([...html.matchAll(/<\/main>/g)].length, 1, path.relative(buildDir, page));
+	}
+});
+
+test('podcast artwork and header logo reserve image space in rendered HTML', async () => {
+	const html = await fs.readFile(path.join(buildDir, 'podcasts/birth-of-buddha/index.html'), 'utf8');
+	const images = [...html.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);
+	assert.ok(images.length >= 2);
+	for (const image of images) {
+		assert.match(image, /\bwidth="[1-9]\d*"/);
+		assert.match(image, /\bheight="[1-9]\d*"/);
+	}
+	assert.match(images[0], /\bloading="eager"/);
+});
