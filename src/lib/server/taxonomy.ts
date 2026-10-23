@@ -48,13 +48,16 @@ export async function archive(kind: TaxonomyKind, slug: string) {
         ? included.has(slugOf(data.category))
         : Array.isArray(data.tags) && data.tags.some((value) => included.has(slugOf(value)));
     }));
-    return items.map((item): ArchiveItem => ({
-      collection: name,
-      slug: item.slug,
-      title: stringValue(item.title) || item.slug,
-      excerpt: stringValue('excerpt' in item ? item.excerpt : '') || stringValue('description' in item ? item.description : ''),
-      date: stringValue(item.date)
-    }));
+    return items.map((item): ArchiveItem => {
+      const record = item as unknown as Record<string, unknown>;
+      return {
+        collection: name,
+        slug: item.slug,
+        title: stringValue(record.title) || item.slug,
+        excerpt: stringValue(record.excerpt) || stringValue(record.description),
+        date: stringValue(record.date)
+      };
+    });
   }));
   return {
     term: term as unknown as Record<string, unknown>,
