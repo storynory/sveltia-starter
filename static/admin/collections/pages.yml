@@ -16,6 +16,24 @@ collections:
         widget: text
         required: false
 
+      - name: seo
+        label: SEO (optional overrides)
+        widget: object
+        collapsed: true
+        required: false
+        hint: By default the page title and excerpt are used for search and social sharing.
+        fields:
+          - name: title
+            label: SEO Title
+            widget: string
+            required: false
+            hint: Leave blank to use the page title. Prefer matching the visible heading.
+          - name: description
+            label: Meta Description
+            widget: text
+            required: false
+            hint: Leave blank to use the excerpt.
+
       - name: layout
         label: Page Layout
         widget: select
