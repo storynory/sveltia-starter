@@ -74,13 +74,15 @@ export type PeopleContent = {
 
 export type PodcastsContent = {
 	"title": string;
+	"draft": boolean;
 	"body"?: string;
+	"excerpt"?: string;
 	"description"?: string;
 	"date": string;
-	"draft": boolean;
 	"episodeNumber"?: number;
 	"seasonNumber"?: number;
 	"audio"?: string;
+	"bitrate"?: number;
 	"length"?: number;
 	"duration"?: string;
 	"author"?: string;
@@ -101,11 +103,11 @@ export type PodcastsContent = {
 
 export type PostsContent = {
 	"title": string;
+	"draft": boolean;
 	"body": string;
 	"excerpt"?: string;
 	"date": string;
 	"author"?: string;
-	"draft": boolean;
 	"category"?: string;
 	"tags"?: string[];
 	"showOnHome"?: boolean;
