@@ -12,7 +12,8 @@
   } = $props();
 
   let menuOpen = $state(false);
-  const closeMenu = () => { menuOpen = false; };
+  let openDropdown = $state<number | null>(null);
+  const closeMenu = () => { menuOpen = false; openDropdown = null; };
 </script>
 
 <header>
@@ -36,8 +37,8 @@
 
       <nav id="main-navigation" aria-label="Main" class:open={menuOpen}>
         <ul class="primary">
-          {#each items as item}
-            <li>
+          {#each items as item, index}
+            <li class:expanded={openDropdown === index}>
               {#if item.url}
                 <a
                   href={item.url}
@@ -52,7 +53,16 @@
                   {#if item.newTab}<span class="sr-only"> (opens in a new tab)</span>{/if}
                 </a>
               {:else}
-                <span class="nav-label">{item.label}</span>
+                {#if item.children?.length}
+                  <button
+                    type="button"
+                    class="nav-label dropdown-toggle"
+                    aria-expanded={openDropdown === index}
+                    onclick={() => (openDropdown = openDropdown === index ? null : index)}
+                  >{item.label}</button>
+                {:else}
+                  <span class="nav-label">{item.label}</span>
+                {/if}
               {/if}
               {#if item.children?.length}
                 <ul class="submenu">
@@ -106,6 +116,14 @@
   .primary > li { position: relative; }
   .primary a { display: inline-flex; align-items: center; gap: .35em; }
   .nav-label { display: inline-block; }
+  .dropdown-toggle {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
   .submenu {
     display: none;
     position: absolute;
@@ -121,7 +139,8 @@
   }
   .submenu a { display: block; padding: .35rem .5rem; }
   .primary > li:hover > .submenu,
-  .primary > li:focus-within > .submenu { display: block; }
+  .primary > li:focus-within > .submenu,
+  .primary > li.expanded > .submenu { display: block; }
   .menu-toggle { display: none; }
   .icon {
     display: inline-block;
@@ -157,7 +176,7 @@
     .primary { display: block; border-top: 1px solid var(--gray); padding-top: .5rem; }
     .primary > li { margin: 0; }
     .primary > li > a, .nav-label { display: flex; padding: .65rem .25rem; }
-    .submenu, .primary > li:hover > .submenu, .primary > li:focus-within > .submenu {
+    .submenu, .primary > li:hover > .submenu, .primary > li:focus-within > .submenu, .primary > li.expanded > .submenu {
       display: block;
       position: static;
       min-width: 0;
