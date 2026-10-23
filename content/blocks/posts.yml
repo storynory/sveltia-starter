@@ -1,0 +1,15 @@
+title: posts
+type: latest
+heading: Posts
+introduction: here are latest posts
+image: ''
+imageAlt: ''
+imagePosition: right
+buttonText: ''
+buttonUrl: ''
+collection: posts
+category: ''
+tags: []
+tagMatch: any
+limit: 4
+items: []
