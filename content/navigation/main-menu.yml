@@ -8,15 +8,21 @@ items:
     url: /pages/about/
     newTab: false
     children: []
-  - label: Search
-    url: /search/
+  - label: Contact
+    url: /contact/
     newTab: false
     children: []
   - label: Podcasts
     url: /podcasts/
     newTab: false
-    children: []
-  - label: Contact
-    url: /contact/
+    children:
+      - label: Myths
+        url: /category/myths/
+        newTab: false
+      - label: England
+        url: /category/England/
+        newTab: false
+  - label: Search
+    url: /search/
     newTab: false
     children: []
