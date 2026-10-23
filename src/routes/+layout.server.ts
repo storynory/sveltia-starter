@@ -57,6 +57,9 @@ export const load: LayoutServerLoad = async () => {
 			fontScale: boundedNumber(preset.fontScale, defaultTypography.fontScale, 1, 1.6),
 			lineHeight: boundedNumber(preset.lineHeight, defaultTypography.lineHeight, 1, 2.2)
 		},
+		siteUrl: typeof settings.siteUrl === 'string' ? settings.siteUrl : '',
+		siteDescription: typeof settings.description === 'string' ? settings.description : '',
+		defaultImage: typeof settings.defaultImage === 'string' ? settings.defaultImage : '',
 		siteName: typeof settings.siteName === 'string' ? settings.siteName : '',
 		siteLogo: typeof settings.siteLogo === 'string' ? settings.siteLogo : '',
 		navigation: (await getOne('navigation', 'main-menu'))?.items ?? [],
