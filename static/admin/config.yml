@@ -2,6 +2,7 @@ backend:
   name: github
   repo: storynory/sveltia-starter
   branch: main
+  base_url: https://sveltia-cms-auth.hugh-6ba.workers.dev
 
 media_folder: static/uploads
 public_folder: /uploads
